@@ -80,25 +80,26 @@ Jika variabel tidak bisa di-map ke komponen apapun → arsitektur perlu didesain
 ```
 SYSTEM-EXPERIMENT MAPPING
 
-Research Question: ____________________
+Research Question: Apakah penggunaan CNN Custom dapat meningkatkan akurasi deteksi penyakit daun tomat dibandingkan LeNet-5?
 
 Variable → Component Mapping:
-| Variabel | Tipe | Komponen Sistem | Cara Manipulasi/Pengukuran |
-|----------|------|-----------------|---------------------------|
-|          | IV   |                 |                           |
-|          | DV   |                 |                           |
-|          | CV   |                 |                           |
+| Variabel                 | Tipe | Komponen Sistem      | Cara Manipulasi/Pengukuran                                        |
+| ------------------------ | ---- | -------------------- | ----------------------------------------------------------------- |
+| Jenis arsitektur CNN     | IV   | Model klasifikasi    | Mengganti model LeNet-5 dengan CNN Custom                         |
+| Akurasi deteksi penyakit | DV   | Modul evaluasi model | Mengukur accuracy, precision, recall menggunakan confusion matrix |
+| Dataset citra daun tomat | CV   | Dataset input        | Menggunakan dataset yang sama untuk semua model                   |
+
 
 4 Prinsip Desain:
-  [ ] Traceability — Setiap komponen bisa ditelusuri ke variabel
-  [ ] Variable Isolation — IV bisa diubah tanpa mengubah CV
-  [ ] Measurement Integration — Pengukuran DV built-in
-  [ ] Reproducibility — Setup bisa direkonstruksi
+  [v] Traceability — Setiap komponen bisa ditelusuri ke variabel
+  [v] Variable Isolation — IV bisa diubah tanpa mengubah CV
+  [v] Measurement Integration — Pengukuran DV built-in
+  [v] Reproducibility — Setup bisa direkonstruksi
 
 Experimental Setup:
-  Input data     : ____________________
-  Parameter      : ____________________
-  Output format  : ____________________
+  Input data     : citra daun tomat
+  Parameter      : Epoch, learning rate, batch size
+  Output format  : Nilai accuracy, precision, recall, dan confusion matrix
 ```
 
 ---
@@ -107,15 +108,16 @@ Experimental Setup:
 
 Gunakan RQ dan variabel dari WS-05. Petakan ke komponen sistem.
 
-**RQ:** __________________________________________________
+**RQ:** Apakah penggunaan CNN Custom dapat meningkatkan akurasi deteksi penyakit daun tomat dibandingkan LeNet-5?
 
-| Variabel | Tipe | Komponen Sistem | Cara Manipulasi / Pengukuran |
-|----------|------|-----------------|---------------------------|
-| *Contoh: Jenis model* | *IV* | *Modul classifier (swap RF ↔ CNN)* | *Ganti config `model_type`* |
-| | DV | | |
-| | CV | | |
+| Variabel                 | Tipe | Komponen Sistem       | Cara Manipulasi / Pengukuran                                          |
+| ------------------------ | ---- | --------------------- | --------------------------------------------------------------------- |
+| Jenis arsitektur CNN     | IV   | Modul klasifikasi CNN | Mengganti model LeNet-5 dengan CNN Custom                             |
+| Akurasi deteksi penyakit | DV   | Modul evaluasi model  | Mengukur accuracy, precision, dan recall menggunakan confusion matrix |
+| Dataset citra daun tomat | CV   | Dataset input         | Menggunakan dataset yang sama pada semua model                        |
 
-**Apakah semua variabel bisa di-map?** [ ] Ya / [ ] Tidak
+
+**Apakah semua variabel bisa di-map?** [v] Ya / [ ] Tidak
 > Jika tidak, komponen apa yang perlu ditambahkan? _________
 
 ---
@@ -124,16 +126,17 @@ Gunakan RQ dan variabel dari WS-05. Petakan ke komponen sistem.
 
 Evaluasi desain sistem terhadap 4 prinsip.
 
-| Prinsip | Status | Bukti / Penjelasan |
-|---------|--------|-------------------|
-| Traceability | *Contoh: ✅ — setiap modul punya label variabel* | |
-| Modularity | | |
-| Controllability | | |
-| Measurability | | |
+| Prinsip         | Status | Bukti / Penjelasan                                                                         |
+| --------------- | ------ | ------------------------------------------------------------------------------------------ |
+| Traceability    | ✅      | Setiap variabel terhubung dengan komponen sistem seperti modul CNN, dataset, dan evaluasi  |
+| Modularity      | ✅      | Model CNN dapat diganti antara LeNet-5 dan CNN Custom tanpa mengubah sistem utama          |
+| Controllability | ✅      | Variabel kontrol seperti dataset dan parameter training dijaga tetap sama                  |
+| Measurability   | ✅      | Performa sistem dapat diukur menggunakan accuracy, precision, recall, dan confusion matrix |
 
-**Prinsip mana yang paling sulit dipenuhi?** _______________
+
+**Prinsip mana yang paling sulit dipenuhi?** Controllability
 **Strategi untuk mengatasinya:**
-> ___________________________________________________
+>Menggunakan dataset, parameter, dan lingkungan pengujian yang sama agar hasil perbandingan model tetap adil dan konsisten.
 
 ---
 
@@ -144,16 +147,17 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 > **Panduan jumlah kondisi:** Untuk 3 komponen (A, B, C), kondisi minimal yang direkomendasikan:
 > Full + (-A) + (-B) + (-C) = **4 kondisi dasar**. Jika waktu memungkinkan, tambahkan kombinasi ganda: (-A,-B), (-A,-C), (-B,-C) = **7 kondisi**. Sesuaikan dengan *computational cost* dan tenggat waktu penelitian.
 
-| Kondisi | Komponen A | Komponen B | Komponen C | Hasil yang Diharapkan |
-|---------|-----------|-----------|-----------|----------------------|
-| Full | *Contoh: ✅ CNN* | *Contoh: ✅ Temporal features* | *Contoh: ✅ Z-score norm* | *Baseline penuh* |
-| – A | ❌ (ganti RF) | ✅ | ✅ | |
-| – B | ✅ | ❌ (tanpa temporal) | ✅ | |
-| – C | ✅ | ✅ | ❌ (tanpa normalisasi) | |
+| Kondisi | Komponen A        | Komponen B            | Komponen C               | Hasil yang Diharapkan                                   |
+| ------- | ----------------- | --------------------- | ------------------------ | ------------------------------------------------------- |
+| Full    | ✅ CNN Custom      | ✅ Data preprocessing  | ✅ Hyperparameter tuning  | Akurasi terbaik sebagai baseline penuh                  |
+| – A     | ❌ LeNet-5 standar | ✅                     | ✅                        | Akurasi menurun dibanding CNN Custom                    |
+| – B     | ✅                 | ❌ Tanpa preprocessing | ✅                        | Model kurang stabil karena kualitas citra tidak seragam |
+| – C     | ✅                 | ✅                     | ❌ Tanpa tuning parameter | Akurasi menurun karena parameter tidak optimal          |
 
-**Komponen mana yang diprediksi paling berkontribusi?** _____
+
+**Komponen mana yang diprediksi paling berkontribusi?** Komponen A (CNN Custom)
 **Mengapa?**
-> ___________________________________________________
+> Karena arsitektur model CNN paling berpengaruh terhadap kemampuan sistem dalam mengenali pola penyakit pada citra daun tomat sehingga berdampak langsung pada peningkatan akurasi deteksi.
 
 ---
 
@@ -162,5 +166,7 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 > Apa risiko jika sistem dibangun seperti produk (monolitik, fitur lengkap) lalu baru dilakukan eksperimen? Mengapa arsitektur modular penting untuk riset?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+Jika sistem langsung dibangun seperti produk yang monolitik dan penuh fitur, akan sulit mengetahui komponen mana yang sebenarnya mempengaruhi hasil eksperimen. Perubahan kecil pada satu bagian juga bisa memengaruhi bagian lain sehingga hasil penelitian menjadi kurang jelas dan sulit dievaluasi.
+
+Arsitektur modular penting dalam riset karena setiap komponen dapat diuji, diganti, atau dihapus secara terpisah. Dengan begitu, peneliti lebih mudah melakukan eksperimen, ablation study, dan membuktikan pengaruh tiap komponen terhadap hasil penelitian.
+
