@@ -77,39 +77,46 @@ Membandingkan deep learning 2024 dengan decision tree sederhana tanpa justifikas
 ```
 LITERATURE MAPPING
 
-Topik      : ____________________
-Database   : ____________________
-Query      : ____________________
-Tahun      : ____________________
-Hasil awal : ____ paper → Screening → ____ paper final
+Topik      : Deteksi penyakit daun tomat menggunakan CNN
+Database   : Google Scholar
+Query      : “tomato leaf disease detection CNN”
+Tahun      : 2020–2025
+Hasil awal : 50 paper → Screening → 5 paper final
 
 Literature Matrix (concept-centric):
 
 | Study | Tahun | Method | Data | Result | Limitation |
 |-------|-------|--------|------|--------|------------|
-|       |       |        |      |        |            |
+|   Saputra et al.    |  2023     |  CNN LeNet-5 Custom      |   2000 citra daun tomat   |  Akurasi 95%      |    Dataset hanya 4 kelas        |
+|Wahid et al.|2021|Inception V4|Citra daun tomat|Akurasi 90%|Komputasi lebih tinggi|
+|Putri et al.|2021|ANN Backpropagation| Data daun tomat| Akurasi 78%|Ekstraksi fitur manual|
+|Rosiani et al.|2020|K-Means Segmentation|Citra daun jagung|Akurasi 90%|Fokus hanya segmentasi|
+|Laily|2013|Artificial Neural Network|Daun tembakau| Akurasi 73%| Akurasi masih rendah|
 
 Pola yang ditemukan:
-  Metode dominan     : ____________________
-  Dataset umum       : ____________________
-  Limitasi berulang  : ____________________
+  Metode dominan     : Convolutional Neural Network (CNN)
+  Dataset umum       : Citra digital daun tanaman
+  Limitasi berulang  : Dataset terbatas dan risiko overfitting
 
 GAP IDENTIFICATION
 
-Gap 1: [Jenis: performance / method / data / context]
-  Deskripsi    : ____________________
-  Bukti        : ____________________
-  Signifikansi : ____________________
+Gap 1: [Jenis: performance]
+  Deskripsi    : Akurasi model masih belum stabil pada kondisi data nyata yang beragam
+  Bukti        : Sebagian besar penelitian hanya menggunakan dataset terbatas dan kondisi citra terkontrol
+  Signifikansi : Model perlu lebih robust agar dapat digunakan langsung oleh petani di lapangan
 
-Gap 2: [Jenis: ____]
-  Deskripsi    : ____________________
-  Bukti        : ____________________
-  Signifikansi : ____________________
+Gap 2: [Jenis: Data]
+  Deskripsi    : Jumlah kelas penyakit yang digunakan masih sedikit
+  Bukti        : Banyak penelitian hanya memakai 3–4 jenis penyakit daun
+  Signifikansi : Penambahan variasi penyakit dapat meningkatkan kemampuan generalisasi model
 
 Baseline Selection:
 | Baseline | Relevansi | Representatif | Source |
 |----------|-----------|---------------|--------|
-|          |           |               |        |
+| LeNet-5 CNN         | Tinggi    | Ya            | Saputra et al., 2023 |
+| Inception V4        | Tinggi    | Ya            | Wahid et al., 2021   |
+| ANN Backpropagation | Sedang    | Cukup         | Putri et al., 2021   |
+
 ```
 
 ---
@@ -123,21 +130,21 @@ Gunakan topik riset dari WS-02. Cari minimal 5 paper relevan menggunakan databas
 > - Tulis query Boolean yang digunakan: contoh `("object detection" OR "image classification") AND ("edge computing") NOT ("medical")`. Dokumentasikan query secara eksplisit.
 > - Akses gratis: buka Google Scholar → cari judul paper → klik [PDF] jika tersedia, atau akses lewat campus VPN
 
-**Topik riset:** ________________________________________
-**Query pencarian:** ____________________________________
-**Database:** ___________________________________________
+**Topik riset:** Deteksi penyakit daun tomat menggunakan CNN
+**Query pencarian:** ("tomato leaf disease" OR "leaf disease detection") AND ("CNN" OR "deep learning") NOT ("medical")
+**Database:** Google Scholar
 
 | # | Study | Tahun | Method | Dataset | Result | Limitasi |
 |---|-------|-------|--------|---------|--------|----------|
-| 1 | *Contoh: Rahman et al.* | *2023* | *CNN* | *ImageNet subset* | *Acc 91%* | *Hanya 3 kelas* |
-| 2 | | | | | | |
-| 3 | | | | | | |
-| 4 | | | | | | |
-| 5 | | | | | | |
+| 1 | Saputra et al. | 2023  | CNN LeNet-5 Custom        | 2000 citra daun tomat | Acc 95% | Dataset hanya 4 kelas  |
+| 2 | Wahid et al.   | 2021  | Inception V4              | Citra daun tomat      | Acc 90% | Komputasi tinggi       |
+| 3 | Putri et al.   | 2021  | ANN Backpropagation       | Data daun tomat       | Acc 78% | Ekstraksi fitur manual |
+| 4 | Rosiani et al. | 2020  | K-Means + CNN             | Citra daun jagung     | Acc 90% | Fokus segmentasi       |
+| 5 | Laily          | 2013  | Artificial Neural Network | Daun tembakau         | Acc 73% | Akurasi rendah         |
 
-**Pola yang terlihat — Metode dominan:** ___________________
-**Limitasi yang berulang:** ______________________________
 
+**Pola yang terlihat — Metode dominan:** CNN
+**Limitasi yang berulang:** Dataset terbatas, jumlah kelas sedikit, dan risiko overfitting.
 ---
 
 ## Latihan 2 — Gap Identification
@@ -146,14 +153,14 @@ Berdasarkan tabel di Latihan 1, identifikasi gap.
 
 | Jenis Gap | Ditemukan? | Gap Statement |
 |-----------|-----------|---------------|
-| Performance Gap | [ ] Ya / [ ] Tidak | *Contoh: Akurasi turun di bawah 80% untuk kelas minoritas* |
-| Method Gap | [ ] Ya / [ ] Tidak | |
-| Data Gap | [ ] Ya / [ ] Tidak | |
-| Context Gap | [ ] Ya / [ ] Tidak | |
+| Performance Gap | [V] Ya / [ ] Tidak | Akurasi model masih menurun pada dataset yang terbatas dan kondisi citra yang beragam |
+| Method Gap | [V] Ya / [ ] Tidak |Sebagian penelitian masih menggunakan metode ANN yang memerlukan ekstraksi fitur manual |
+| Data Gap | [v] Ya / [ ] Tidak | Banyak penelitian hanya menggunakan sedikit kelas penyakit dan jumlah data terbatas|
+| Context Gap | [v] Ya / [ ] Tidak |Model umumnya diuji pada kondisi laboratorium, belum banyak diterapkan pada kondisi nyata di lapangan |
 
-**Gap utama yang dipilih:** _____________________________
+**Gap utama yang dipilih:** Data Gap
 **Mengapa gap ini penting (bukan sekadar "belum ada yang meneliti")?**
-> ___________________________________________________
+>Karena dataset yang terbatas dapat membuat model kurang mampu mengenali variasi penyakit pada kondisi nyata. Akibatnya, performa sistem bisa menurun saat digunakan langsung oleh petani di lapangan sehingga hasil deteksi menjadi kurang akurat dan kurang dapat diandalkan.
 
 ---
 
@@ -161,13 +168,13 @@ Berdasarkan tabel di Latihan 1, identifikasi gap.
 
 Pilih 2 baseline dari literatur yang sudah dibaca.
 
-| # | Baseline | Mengapa Relevan | Mengapa Representatif | Apakah SOTA? | Sumber |
-|---|----------|----------------|----------------------|-------------|--------|
-| 1 | *Contoh: RF + TF-IDF* | *Task sama: klasifikasi teks* | *Dipakai 6 dari 10 paper* | *Bukan, tapi common practice* | *Lee et al., 2022* |
-| 2 | | | | | |
+| # | Baseline     | Mengapa Relevan                                               | Mengapa Representatif                                          | Apakah SOTA?                       | Sumber               |
+| - | ------------ | ------------------------------------------------------------- | -------------------------------------------------------------- | ---------------------------------- | -------------------- |
+| 1 | LeNet-5 CNN  | Digunakan untuk deteksi penyakit daun tomat berbasis citra    | Banyak dipakai pada penelitian klasifikasi citra sederhana     | Bukan, tetapi masih umum digunakan | Saputra et al., 2023 |
+| 2 | Inception V4 | Memiliki task yang sama yaitu klasifikasi penyakit daun tomat | Digunakan pada penelitian deep learning dengan performa tinggi | Ya, termasuk arsitektur modern     | Wahid et al., 2021   |
 
-**Apakah pemilihan baseline ini bisa dianggap straw man?** [ ] Ya / [ ] Tidak
-> Justifikasi: ________________________________________
+**Apakah pemilihan baseline ini bisa dianggap straw man?** [ ] Ya / [v] Tidak
+> Justifikasi: Baseline dipilih dari metode yang memang digunakan pada penelitian serupa dan memiliki relevansi langsung dengan tugas klasifikasi penyakit daun tomat, sehingga perbandingan dilakukan secara adil dan realistis.
 
 ---
 
@@ -176,5 +183,7 @@ Pilih 2 baseline dari literatur yang sudah dibaca.
 > Apa perbedaan antara "belum ada yang meneliti ini" (klaim tanpa bukti) dengan research gap yang valid? Bagaimana cara membuktikan bahwa sebuah gap benar-benar ada?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> “Belum ada yang meneliti ini” hanya berupa asumsi tanpa bukti dari literatur. Sedangkan research gap yang valid harus didukung hasil analisis beberapa penelitian, misalnya adanya keterbatasan metode, data, performa, atau konteks yang belum teratasi.
+
+Cara membuktikannya adalah dengan melakukan studi literatur, membandingkan hasil penelitian sebelumnya, lalu menunjukkan pola kekurangan atau masalah yang masih muncul secara konsisten.
+
