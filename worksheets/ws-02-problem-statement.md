@@ -67,33 +67,33 @@ Masalah riset yang layak harus memenuhi 5 kriteria:
 PROBLEM STATEMENT BUILDER
 
 Domain & Konteks
-  Domain   : ____________________
-  Konteks  : ____________________
+  Domain   : Pertanian / Artificial Intelligence
+  Konteks  : Deteksi penyakit daun tomat menggunakan CNN
 
 System Context
-  Input       : ____________________
-  Process     : ____________________
-  Output      : ____________________
-  Outcome     : ____________________
-  Constraints : ____________________
-  Stakeholders: ____________________
+  Input       : Citra daun tomat
+  Process     : Pengolahan citra dan klasifikasi menggunakan CNN
+  Output      : Jenis penyakit daun tomat
+  Outcome     : Membantu identifikasi penyakit lebih cepat dan akurat
+  Constraints : Dataset terbatas, variasi pencahayaan dan kualitas citra
+  Stakeholders: Petani, peneliti, pengembang sistem pertanian
 
 Fenomena → Problem
-  Fenomena yang diamati             : ____________________
-  Gejala (symptom) yang terukur     : ____________________
-  Masalah yang didiagnosis          : ____________________
-  Masalah riset (researchable)      : ____________________
-  Variabel yang terukur             : ____________________
+  Fenomena yang diamati             : Petani kesulitan membedakan penyakit daun tomat karena gejalanya mirip
+  Gejala (symptom) yang terukur     : Tingginya kesalahan identifikasi penyakit secara manual
+  Masalah yang didiagnosis          : Proses identifikasi penyakit masih lambat dan kurang akurat
+  Masalah riset (researchable)      : Bagaimana meningkatkan akurasi deteksi penyakit daun tomat menggunakan CNN?
+  Variabel yang terukur             : Akurasi, precision, recall, waktu proses
 
 Problem Quality Check
-  [ ] Clarity — Apakah satu orang membaca akan paham?
-  [ ] Measurability — Apakah ada metrik kuantitatif?
-  [ ] Relevance — Apakah penting untuk domain?
-  [ ] Testability — Apakah bisa gagal?
-  [ ] Impact — Apakah ada kontribusi jika terjawab?
+  [v] Clarity — Apakah satu orang membaca akan paham?
+  [v] Measurability — Apakah ada metrik kuantitatif?
+  [v] Relevance — Apakah penting untuk domain?
+  [v] Testability — Apakah bisa gagal?
+  [v] Impact — Apakah ada kontribusi jika terjawab?
 
 Problem Statement (1 paragraf):
-  ____________________
+Identifikasi penyakit daun tomat secara manual masih sulit dilakukan karena beberapa penyakit memiliki gejala yang mirip, sehingga dapat menyebabkan kesalahan diagnosis dan menurunkan kualitas hasil panen. Penelitian ini bertujuan mengembangkan metode Convolutional Neural Network (CNN) untuk mendeteksi jenis penyakit daun tomat berdasarkan citra digital dengan tingkat akurasi yang lebih tinggi dan proses identifikasi yang lebih cepat dibandingkan metode manual.
 ```
 
 ---
@@ -106,13 +106,13 @@ Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Pro
 
 | Tahap | Hasil |
 |-------|-------|
-| Reality | *Contoh: Aplikasi e-commerce sering ditinggalkan saat checkout* |
-| Observed Issue (Symptom) | *Contoh: Bounce rate checkout 68%* |
-| Diagnosed Problem (Root Cause) | |
-| Researchable Problem | |
-| Measurable Variable | |
+| Reality | Petani sering kesulitan mengenali penyakit pada daun tanaman secara cepat dan tepat|
+| Observed Issue (Symptom) | Tingginya kesalahan identifikasi penyakit daun secara manual |
+| Diagnosed Problem (Root Cause) |Gejala penyakit memiliki kemiripan dan identifikasi masih bergantung pada pengamatan manusia |
+| Researchable Problem |Bagaimana meningkatkan akurasi deteksi penyakit daun tanaman menggunakan metode CNN? |
+| Measurable Variable |Akurasi, precision, recall, dan waktu deteksi|
 
-**Apakah terjebak solution-first thinking?** [ ] Ya / [ ] Tidak
+**Apakah terjebak solution-first thinking?** [ ] Ya / [v] Tidak
 > Jika ya, kembali ke tahap mana? ________________________
 
 ---
@@ -122,15 +122,15 @@ Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Pro
 Gambarkan konteks sistem dari masalah riset di Latihan 1.
 
 | Komponen | Deskripsi |
-|----------|----------|
-| Input | *Contoh: Request HTTP dari browser pengguna* |
-| Process | |
-| Output | |
-| Outcome | |
-| Constraints | |
-| Stakeholders | |
+|----------|----------|st 
+| Input | Citra daun tanaman tomat |
+| Process | Pengolahan citra dan klasifikasi penyakit menggunakan CNN|
+| Output |Hasil deteksi jenis penyakit daun tomat |
+| Outcome |Membantu petani melakukan identifikasi penyakit lebih cepat dan akurat |
+| Constraints |Dataset terbatas, kualitas citra berbeda-beda, dan kebutuhan komputasi |
+| Stakeholders |Petani, peneliti, dan pengembang sistem AI pertanian |
 
-**Komponen mana yang paling relevan dengan masalah riset?** _______________
+**Komponen mana yang paling relevan dengan masalah riset?** Process (proses klasifikasi menggunakan CNN)
 
 ---
 
@@ -140,17 +140,16 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 
 | Kriteria | Skor (1-5) | Justifikasi |
 |----------|-----------|-------------|
-| Clarity | *Contoh: 4 — cukup jelas tapi perlu spesifikasi dataset* | |
-| Measurability | | |
-| Relevance | | |
-| Testability | | |
-| Impact | | |
+| Clarity | 4 | Masalah sudah jelas, tetapi spesifikasi dataset dan jenis penyakit masih bisa diperjelas|
+| Measurability |5 | Menggunakan metrik terukur seperti akurasi, precision, dan recall|
+| Relevance |5 |Topik penting dalam bidang pertanian dan AI |
+| Testability |4 | Model dapat diuji, tetapi hasil bisa dipengaruhi keterbatasan dataset|
+| Impact |5 |Berpotensi membantu identifikasi penyakit tanaman lebih cepat dan efisien |
 
-**Skor total:** _____ / 25
+**Skor total:** 23 / 25
 
 **Problem statement versi final (1 paragraf):**
-> ___________________________________________________
-> ___________________________________________________
+> Identifikasi penyakit daun tomat secara manual masih sulit dilakukan karena beberapa penyakit memiliki gejala yang mirip sehingga sering menyebabkan kesalahan diagnosis. Penelitian ini bertujuan mengembangkan metode Convolutional Neural Network (CNN) untuk mendeteksi penyakit daun tomat berdasarkan citra digital dengan tingkat akurasi yang tinggi agar proses identifikasi penyakit menjadi lebih cepat, tepat, dan membantu petani dalam menjaga kualitas hasil panen.
 
 ---
 
@@ -159,5 +158,6 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 > Bandingkan "masalah" yang biasa ditemui saat coding (bug, error) dengan masalah riset. Apa perbedaan fundamental dalam cara mendefinisikan dan mendekati keduanya?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Masalah dalam coding seperti bug atau error biasanya lebih mudah dikenali karena terlihat langsung dari program yang tidak berjalan sesuai harapan. Penyebabnya cenderung jelas dan solusi dapat dicari dengan memperbaiki bagian kode, logika program, atau konfigurasi yang bermasalah. Fokus utamanya adalah membuat sistem kembali berjalan dengan benar.
+
+Sedangkan masalah riset memiliki sifat yang lebih kompleks karena penyebab utamanya belum tentu diketahui dan belum memiliki solusi pasti. Dalam riset, masalah harus dipahami terlebih dahulu melalui pengamatan, pengumpulan data, dan analisis sebelum menentukan solusi yang tepat. Oleh karena itu, coding lebih berfokus pada memperbaiki kesalahan yang sudah diketahui, sedangkan riset berfokus pada menemukan pemahaman dan solusi baru berdasarkan proses ilmiah.
