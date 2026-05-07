@@ -4,7 +4,7 @@
 
 ---
 
-## Ringkasan Materi
+## Ringkasan Materi 
 
 ### Research Trust Model
 
