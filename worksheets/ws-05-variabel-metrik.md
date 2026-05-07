@@ -66,19 +66,20 @@ Metrik harus ditentukan **sebelum** eksperimen. Memilih metrik setelah melihat d
 ```
 VARIABLE & METRIC DEFINITION
 
-Research Question: ____________________
+Research Question: Apakah penggunaan CNN Custom dapat meningkatkan akurasi deteksi penyakit daun tomat dibandingkan LeNet-5?
 
-| Variabel | Tipe | Konsep | Metrik | Skala | Satuan | Cara Mengukur | Justifikasi |
-|----------|------|--------|--------|-------|--------|---------------|-------------|
-|          | IV   |        |        |       |        |               |             |
-|          | DV   |        |        |       |        |               |             |
-|          | CV   |        |        |       |        |               |             |
+| Variabel                 | Tipe | Konsep                                            | Metrik                      | Skala   | Satuan       | Cara Mengukur                                  | Justifikasi                                      |
+| ------------------------ | ---- | ------------------------------------------------- | --------------------------- | ------- | ------------ | ---------------------------------------------- | ------------------------------------------------ |
+| Jenis arsitektur CNN     | IV   | Perbedaan model CNN yang digunakan                | Jenis model                 | Nominal | -            | Membandingkan CNN Custom dan LeNet-5           | Untuk melihat pengaruh model terhadap performa   |
+| Akurasi deteksi          | DV   | Kemampuan model mengenali penyakit daun tomat     | Accuracy, precision, recall | Rasio   | Persen (%)   | Menggunakan confusion matrix                   | Mengukur performa model klasifikasi              |
+| Dataset citra daun tomat | CV   | Data yang digunakan untuk pelatihan dan pengujian | Jumlah dan kelas data       | Rasio   | Jumlah citra | Menggunakan dataset yang sama pada semua model | Agar perbandingan hasil lebih adil dan konsisten |
+
 
 Alignment Check:
   RQ → Concept → Variable → Metric → Data → Result
-  [ ] Setiap langkah terdokumentasi
-  [ ] Tidak ada "lompatan logis"
-  [ ] Metrik mengukur apa yang dimaksud (construct validity)
+  [v] Setiap langkah terdokumentasi
+  [v] Tidak ada "lompatan logis"
+  [v] Metrik mengukur apa yang dimaksud (construct validity)
 ```
 
 ---
@@ -87,15 +88,16 @@ Alignment Check:
 
 Gunakan RQ dari WS-04. Definisikan variabel dan metriknya.
 
-**RQ:** __________________________________________________
+**RQ:** Apakah penggunaan CNN Custom dapat meningkatkan akurasi deteksi penyakit daun tomat dibandingkan LeNet-5?
 
-| Variabel | Tipe | Konsep Abstrak | Metrik Konkret | Skala (NOIR) | Satuan |
-|----------|------|---------------|----------------|-------------|--------|
-| *Contoh: Jenis model* | *IV* | *Pendekatan klasifikasi* | *Categorical: CNN vs RF* | *Nominal* | *—* |
-| | DV | | | | |
-| | CV | | | | |
+| Variabel                 | Tipe | Konsep Abstrak                     | Metrik Konkret                  | Skala (NOIR) | Satuan       |
+| ------------------------ | ---- | ---------------------------------- | ------------------------------- | ------------ | ------------ |
+| Jenis arsitektur CNN     | IV   | Pendekatan klasifikasi citra       | CNN Custom vs LeNet-5           | Nominal      | —            |
+| Akurasi deteksi penyakit | DV   | Kemampuan model mengenali penyakit | Accuracy, precision, recall     | Rasio        | %            |
+| Dataset citra daun tomat | CV   | Data pelatihan dan pengujian model | Jumlah citra dan kelas penyakit | Rasio        | Jumlah citra |
 
-**Apakah ada lompatan logis dalam rantai?** [ ] Ya / [ ] Tidak
+
+**Apakah ada lompatan logis dalam rantai?** [ ] Ya / [v] Tidak
 > Jika ya, di mana? ____________________________________
 
 ---
@@ -104,30 +106,31 @@ Gunakan RQ dari WS-04. Definisikan variabel dan metriknya.
 
 Evaluasi metrik DV yang dipilih di Latihan 1 menggunakan 3 kriteria.
 
-| Kriteria | Skor (1-5) | Justifikasi |
-|----------|-----------|-------------|
-| Representative | *Contoh: 4 — F1-Score mewakili keseimbangan precision-recall* | |
-| Sensitive | | |
-| Feasible | | |
+| Kriteria       | Skor (1–5) | Justifikasi                                                                                                      |
+| -------------- | ---------- | ---------------------------------------------------------------------------------------------------------------- |
+| Representative | 5          | Accuracy, precision, dan recall cukup mewakili performa model klasifikasi penyakit daun tomat                    |
+| Sensitive      | 4          | Metrik dapat menunjukkan perubahan performa model, tetapi accuracy bisa kurang sensitif pada data tidak seimbang |
+| Feasible       | 5          | Mudah dihitung menggunakan confusion matrix dan umum digunakan pada CNN                                          |
 
-**Apakah perlu secondary metric?** [ ] Ya / [ ] Tidak
-> Jika ya, apa dan mengapa? _____________________________
+
+**Apakah perlu secondary metric?** [v] Ya / [ ] Tidak
+> Jika ya, apa dan mengapa? F1-Score, karena dapat menyeimbangkan precision dan recall terutama jika jumlah data tiap kelas tidak seimbang.
 
 **Contoh kasus ceiling effect untuk metrik ini:**
-> ___________________________________________________
-
+> Jika accuracy sudah sangat tinggi, misalnya 98–99%, peningkatan kecil performa model menjadi sulit terlihat hanya dari accuracy saja.
 ---
 
 ## Latihan 3 — Data Quality Check
 
 Bayangkan data yang akan dikumpulkan dari eksperimen. Evaluasi 4 dimensi kualitas data.
 
-| Dimensi | Pertanyaan | Jawaban | Strategi Mitigasi |
-|---------|-----------|---------|------------------|
-| Completeness | *Apakah semua data point terkumpul?* | | |
-| Consistency | *Apakah ada kontradiksi internal?* | | |
-| Validity | *Apakah benar-benar mengukur yang dimaksud?* | | |
-| Representativeness | *Apakah sampel mewakili populasi target?* | | |
+| Dimensi            | Pertanyaan                                 | Jawaban                                                  | Strategi Mitigasi                                            |
+| ------------------ | ------------------------------------------ | -------------------------------------------------------- | ------------------------------------------------------------ |
+| Completeness       | Apakah semua data point terkumpul?         | Tidak semua citra mungkin lengkap atau berkualitas baik  | Melakukan pengecekan dataset dan menghapus data rusak        |
+| Consistency        | Apakah ada kontradiksi internal?           | Bisa terjadi perbedaan label antar data citra            | Validasi ulang label dataset sebelum training                |
+| Validity           | Apakah benar-benar mengukur yang dimaksud? | Ya, karena metrik mengukur performa klasifikasi penyakit | Menggunakan confusion matrix dan evaluasi beberapa metrik    |
+| Representativeness | Apakah sampel mewakili populasi target?    | Belum sepenuhnya, karena dataset masih terbatas          | Menambah variasi citra dan jenis penyakit dari kondisi nyata |
+
 
 ---
 
@@ -136,5 +139,6 @@ Bayangkan data yang akan dikumpulkan dari eksperimen. Evaluasi 4 dimensi kualita
 > Mengapa memilih metrik setelah melihat data dianggap p-hacking? Apa bedanya dengan eksplorasi data yang sah?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Memilih metrik setelah melihat hasil data disebut p-hacking karena metrik dipilih agar hasil terlihat bagus atau signifikan. Ini membuat penelitian menjadi tidak objektif.
+
+Sedangkan eksplorasi data yang sah dilakukan untuk memahami data, bukan untuk mencari hasil yang paling menguntungkan.
