@@ -3,7 +3,7 @@
 > **Bab 1 — Research Mindset in IT**
 
 ---
-
+ 
 ## Ringkasan Materi 
 
 ### Research Trust Model
