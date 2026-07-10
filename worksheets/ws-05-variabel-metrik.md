@@ -66,13 +66,15 @@ Metrik harus ditentukan **sebelum** eksperimen. Memilih metrik setelah melihat d
 ```
 VARIABLE & METRIC DEFINITION
 
-Research Question: Apakah penggunaan CNN Custom dapat meningkatkan akurasi deteksi penyakit daun tomat dibandingkan LeNet-5?
+Research Question: Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat pada dataset PlantVillage serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model?
 
-| Variabel                 | Tipe | Konsep                                            | Metrik                      | Skala   | Satuan       | Cara Mengukur                                  | Justifikasi                                      |
-| ------------------------ | ---- | ------------------------------------------------- | --------------------------- | ------- | ------------ | ---------------------------------------------- | ------------------------------------------------ |
-| Jenis arsitektur CNN     | IV   | Perbedaan model CNN yang digunakan                | Jenis model                 | Nominal | -            | Membandingkan CNN Custom dan LeNet-5           | Untuk melihat pengaruh model terhadap performa   |
-| Akurasi deteksi          | DV   | Kemampuan model mengenali penyakit daun tomat     | Accuracy, precision, recall | Rasio   | Persen (%)   | Menggunakan confusion matrix                   | Mengukur performa model klasifikasi              |
-| Dataset citra daun tomat | CV   | Data yang digunakan untuk pelatihan dan pengujian | Jumlah dan kelas data       | Rasio   | Jumlah citra | Menggunakan dataset yang sama pada semua model | Agar perbandingan hasil lebih adil dan konsisten |
+| Variabel             | Tipe | Konsep                                                       | Metrik                                                  | Skala   | Satuan | Cara Mengukur                                                      | Justifikasi                                                       |
+| -------------------- | ---- | ------------------------------------------------------------ | ------------------------------------------------------- | ------- | ------ | ------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Model CNN            | IV   | Model klasifikasi penyakit daun tomat berbasis CNN           | Arsitektur CNN yang digunakan                           | Nominal | -      | Mengimplementasikan satu model CNN untuk proses klasifikasi        | Model CNN merupakan metode utama yang digunakan dalam penelitian. |
+| Performa klasifikasi | DV   | Kemampuan model dalam mengklasifikasikan penyakit daun tomat | Accuracy, Precision, Recall, F1-score, Confusion Matrix | Rasio   | %      | Menguji model menggunakan data uji dan menghitung metrik evaluasi  | Digunakan untuk mengetahui tingkat keberhasilan model.            |
+| Dataset PlantVillage | CV   | Dataset yang digunakan selama pelatihan dan pengujian        | Dataset tetap                                           | Nominal | -      | Menggunakan dataset PlantVillage yang sama pada seluruh eksperimen | Menjaga konsistensi hasil penelitian.                             |
+
+
 
 
 Alignment Check:
@@ -88,13 +90,14 @@ Alignment Check:
 
 Gunakan RQ dari WS-04. Definisikan variabel dan metriknya.
 
-**RQ:** Apakah penggunaan CNN Custom dapat meningkatkan akurasi deteksi penyakit daun tomat dibandingkan LeNet-5?
+**RQ:** Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat pada dataset PlantVillage serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model?
 
-| Variabel                 | Tipe | Konsep Abstrak                     | Metrik Konkret                  | Skala (NOIR) | Satuan       |
-| ------------------------ | ---- | ---------------------------------- | ------------------------------- | ------------ | ------------ |
-| Jenis arsitektur CNN     | IV   | Pendekatan klasifikasi citra       | CNN Custom vs LeNet-5           | Nominal      | —            |
-| Akurasi deteksi penyakit | DV   | Kemampuan model mengenali penyakit | Accuracy, precision, recall     | Rasio        | %            |
-| Dataset citra daun tomat | CV   | Data pelatihan dan pengujian model | Jumlah citra dan kelas penyakit | Rasio        | Jumlah citra |
+| Variabel             | Tipe | Konsep Abstrak                                         | Metrik Konkret                                          | Skala (NOIR) | Satuan |
+| -------------------- | ---- | ------------------------------------------------------ | ------------------------------------------------------- | ------------ | ------ |
+| Model CNN            | IV   | Metode klasifikasi penyakit daun tomat                 | Implementasi CNN (MobileNetV2)                          | Nominal      | —      |
+| Performa klasifikasi | DV   | Kemampuan model mengklasifikasikan penyakit daun tomat | Accuracy, Precision, Recall, F1-score, Confusion Matrix | Rasio        | %      |
+| Dataset PlantVillage | CV   | Dataset yang digunakan selama eksperimen               | Dataset PlantVillage (10 kelas penyakit daun tomat)     | Nominal      | —      |
+
 
 
 **Apakah ada lompatan logis dalam rantai?** [ ] Ya / [v] Tidak
@@ -106,30 +109,30 @@ Gunakan RQ dari WS-04. Definisikan variabel dan metriknya.
 
 Evaluasi metrik DV yang dipilih di Latihan 1 menggunakan 3 kriteria.
 
-| Kriteria       | Skor (1–5) | Justifikasi                                                                                                      |
-| -------------- | ---------- | ---------------------------------------------------------------------------------------------------------------- |
-| Representative | 5          | Accuracy, precision, dan recall cukup mewakili performa model klasifikasi penyakit daun tomat                    |
-| Sensitive      | 4          | Metrik dapat menunjukkan perubahan performa model, tetapi accuracy bisa kurang sensitif pada data tidak seimbang |
-| Feasible       | 5          | Mudah dihitung menggunakan confusion matrix dan umum digunakan pada CNN                                          |
+| **Kriteria**       | **Skor (1–5)** | **Justifikasi**                                                                                                                               |
+| ------------------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Representative** | **5**          | Accuracy, Precision, Recall, dan F1-score merupakan metrik standar yang mampu merepresentasikan performa model klasifikasi secara menyeluruh. |
+| **Sensitive**      | **5**          | Metrik tersebut sensitif terhadap perubahan hasil prediksi sehingga dapat menunjukkan peningkatan atau penurunan performa model.              |
+| **Feasible**       | **5**          | Seluruh metrik dapat dihitung secara otomatis menggunakan library seperti Scikit-learn sehingga mudah diterapkan pada penelitian.             |
+
 
 
 **Apakah perlu secondary metric?** [v] Ya / [ ] Tidak
-> Jika ya, apa dan mengapa? F1-Score, karena dapat menyeimbangkan precision dan recall terutama jika jumlah data tiap kelas tidak seimbang.
-
+> Confusion Matrix, karena dapat menunjukkan jumlah prediksi yang benar dan salah pada setiap kelas penyakit. Hal ini membantu menganalisis kelas mana yang masih sering mengalami kesalahan klasifikasi.
 **Contoh kasus ceiling effect untuk metrik ini:**
-> Jika accuracy sudah sangat tinggi, misalnya 98–99%, peningkatan kecil performa model menjadi sulit terlihat hanya dari accuracy saja.
+> Jika nilai Accuracy sudah sangat tinggi (misalnya di atas 99%), maka peningkatan performa model akan sulit terlihat hanya dari accuracy. Oleh karena itu, Precision, Recall, F1-score, dan Confusion Matrix tetap diperlukan untuk memberikan evaluasi yang lebih rinci terhadap performa model pada setiap kelas penyakit.
 ---
 
 ## Latihan 3 — Data Quality Check
 
 Bayangkan data yang akan dikumpulkan dari eksperimen. Evaluasi 4 dimensi kualitas data.
 
-| Dimensi            | Pertanyaan                                 | Jawaban                                                  | Strategi Mitigasi                                            |
-| ------------------ | ------------------------------------------ | -------------------------------------------------------- | ------------------------------------------------------------ |
-| Completeness       | Apakah semua data point terkumpul?         | Tidak semua citra mungkin lengkap atau berkualitas baik  | Melakukan pengecekan dataset dan menghapus data rusak        |
-| Consistency        | Apakah ada kontradiksi internal?           | Bisa terjadi perbedaan label antar data citra            | Validasi ulang label dataset sebelum training                |
-| Validity           | Apakah benar-benar mengukur yang dimaksud? | Ya, karena metrik mengukur performa klasifikasi penyakit | Menggunakan confusion matrix dan evaluasi beberapa metrik    |
-| Representativeness | Apakah sampel mewakili populasi target?    | Belum sepenuhnya, karena dataset masih terbatas          | Menambah variasi citra dan jenis penyakit dari kondisi nyata |
+| **Dimensi**            | **Pertanyaan**                             | **Jawaban**                                                                                                             | **Strategi Mitigasi**                                                                                                 |
+| ---------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **Completeness**       | Apakah semua data point terkumpul?         | Ya, seluruh citra daun tomat yang digunakan berasal dari dataset PlantVillage yang telah memiliki label kelas penyakit. | Memastikan seluruh data berhasil dimuat dan tidak ada file yang rusak atau hilang sebelum proses pelatihan.           |
+| **Consistency**        | Apakah ada kontradiksi internal?           | Tidak, seluruh data menggunakan format citra dan label yang konsisten.                                                  | Melakukan preprocessing yang sama pada seluruh citra dan menggunakan pembagian dataset yang konsisten.                |
+| **Validity**           | Apakah benar-benar mengukur yang dimaksud? | Ya, metrik Accuracy, Precision, Recall, dan F1-score digunakan untuk mengukur performa klasifikasi model CNN.           | Menggunakan metrik evaluasi standar dan dataset yang telah diberi label dengan benar.                                 |
+| **Representativeness** | Apakah sampel mewakili populasi target?    | Ya, dataset PlantVillage mencakup beberapa jenis penyakit daun tomat sehingga cukup mewakili objek penelitian.          | Menggunakan seluruh kelas penyakit yang tersedia pada dataset dan membagi data menjadi data latih, validasi, dan uji. |
 
 
 ---
@@ -139,6 +142,4 @@ Bayangkan data yang akan dikumpulkan dari eksperimen. Evaluasi 4 dimensi kualita
 > Mengapa memilih metrik setelah melihat data dianggap p-hacking? Apa bedanya dengan eksplorasi data yang sah?
 
 **Jawaban:**
-> Memilih metrik setelah melihat hasil data disebut p-hacking karena metrik dipilih agar hasil terlihat bagus atau signifikan. Ini membuat penelitian menjadi tidak objektif.
-
-Sedangkan eksplorasi data yang sah dilakukan untuk memahami data, bukan untuk mencari hasil yang paling menguntungkan.
+> Memilih metrik setelah melihat hasil data dapat dianggap sebagai p-hacking karena peneliti berpotensi memilih metrik yang menghasilkan nilai terbaik sehingga kesimpulan menjadi bias. Sebaliknya, eksplorasi data yang sah dilakukan untuk memahami karakteristik data tanpa mengubah tujuan atau metrik penelitian. Oleh karena itu, metrik evaluasi sebaiknya ditentukan sebelum eksperimen dilakukan agar hasil penelitian lebih objektif dan dapat dipercaya.
