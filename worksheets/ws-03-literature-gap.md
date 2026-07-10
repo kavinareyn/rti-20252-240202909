@@ -77,9 +77,11 @@ Membandingkan deep learning 2024 dengan decision tree sederhana tanpa justifikas
 ```
 LITERATURE MAPPING
 
-Topik      : Deteksi penyakit daun tomat menggunakan CNN
-Database   : Google Scholar
-Query      : “tomato leaf disease detection CNN”
+Topik      : Klasifikasi Penyakit Daun Tomat Menggunakan CNN dengan Explainable AI (Grad-CAM)
+Database   : Google Scholar, IEEE Xplore, ScienceDirect
+Query      : ("Tomato Leaf Disease" OR "Tomato Disease Detection")
+AND ("Convolutional Neural Network" OR CNN)
+AND ("Grad-CAM" OR "Explainable AI")
 Tahun      : 2020–2025
 Hasil awal : 50 paper → Screening → 5 paper final
 
@@ -95,27 +97,30 @@ Literature Matrix (concept-centric):
 
 Pola yang ditemukan:
   Metode dominan     : Convolutional Neural Network (CNN)
-  Dataset umum       : Citra digital daun tanaman
-  Limitasi berulang  : Dataset terbatas dan risiko overfitting
+  Dataset umum       : Dataset citra daun tomat (PlantVillage)
+  Limitasi berulang  : Jumlah kelas penyakit masih terbatas dan model belum menyediakan interpretasi hasil prediksi (black box).
 
 GAP IDENTIFICATION
 
-Gap 1: [Jenis: performance]
-  Deskripsi    : Akurasi model masih belum stabil pada kondisi data nyata yang beragam
-  Bukti        : Sebagian besar penelitian hanya menggunakan dataset terbatas dan kondisi citra terkontrol
-  Signifikansi : Model perlu lebih robust agar dapat digunakan langsung oleh petani di lapangan
+Gap 1: Data Gap
+  Deskripsi    : Penelitian sebelumnya hanya mengklasifikasikan empat jenis penyakit daun tomat sehingga belum mencakup variasi penyakit yang lebih luas.
+  Bukti        : Saputra et al. (2023) menggunakan empat kelas penyakit yaitu Healthy, Layu Fusarium, Tomato Crinivirus, dan Tomato Yellow Leaf Curl.
+  Signifikansi : Memperluas jumlah kelas penyakit akan meningkatkan kemampuan model dalam mengenali variasi penyakit yang lebih beragam sehingga lebih relevan untuk penerapan di dunia nyata.
 
-Gap 2: [Jenis: Data]
-  Deskripsi    : Jumlah kelas penyakit yang digunakan masih sedikit
-  Bukti        : Banyak penelitian hanya memakai 3–4 jenis penyakit daun
-  Signifikansi : Penambahan variasi penyakit dapat meningkatkan kemampuan generalisasi model
+Gap 2: [Jenis: Method Gap]
+  Deskripsi    : Penelitian sebelumnya belum menerapkan Explainable Artificial Intelligence (Grad-CAM) sehingga proses pengambilan keputusan model CNN masih sulit dijelaskan.
+  Bukti        : Evaluasi penelitian hanya menggunakan metrik klasifikasi seperti confusion matrix dan akurasi tanpa visualisasi area citra yang menjadi dasar prediksi.
+  Signifikansi : Penambahan Grad-CAM dapat meningkatkan transparansi model dengan memperlihatkan area daun yang menjadi dasar pengambilan keputusan sehingga hasil klasifikasi lebih mudah dipahami dan dipercaya.
 
 Baseline Selection:
-| Baseline | Relevansi | Representatif | Source |
-|----------|-----------|---------------|--------|
-| LeNet-5 CNN         | Tinggi    | Ya            | Saputra et al., 2023 |
-| Inception V4        | Tinggi    | Ya            | Wahid et al., 2021   |
-| ANN Backpropagation | Sedang    | Cukup         | Putri et al., 2021   |
+| Baseline                  | Relevansi     | Representatif                                                                        | Source                            |
+| ------------------------- | ------------- | ------------------------------------------------------------------------------------ | --------------------------------- |
+| **Saputra et al. (2023)** | Sangat Tinggi | Ya (Baseline utama karena topik, objek, dan metode paling mirip)                     | AVITEC, 2023                      |
+| **Wahid et al. (2021)**   | Tinggi        | Ya (Pembanding arsitektur CNN menggunakan Inception V4)                              | KONIK, 2021                       |
+| **Putri et al. (2021)**   | Sedang        | Ya (Pembanding metode ANN non-CNN)                                                   | MATHunesa, 2021                   |
+| **Rosiani et al. (2020)** | Sedang        | Tidak (Objek berbeda, digunakan sebagai referensi metode segmentasi)                 | Jurnal Informatika Polinema, 2020 |
+| **Laily (2013)**          | Rendah        | Tidak (Penelitian lama dan objek berbeda, sebagai referensi perkembangan metode ANN) | Simetris Journal, 2013            |
+
 
 ```
 
@@ -130,37 +135,40 @@ Gunakan topik riset dari WS-02. Cari minimal 5 paper relevan menggunakan databas
 > - Tulis query Boolean yang digunakan: contoh `("object detection" OR "image classification") AND ("edge computing") NOT ("medical")`. Dokumentasikan query secara eksplisit.
 > - Akses gratis: buka Google Scholar → cari judul paper → klik [PDF] jika tersedia, atau akses lewat campus VPN
 
-**Topik riset:** Deteksi penyakit daun tomat menggunakan CNN
-**Query pencarian:** ("tomato leaf disease" OR "leaf disease detection") AND ("CNN" OR "deep learning") NOT ("medical")
-**Database:** Google Scholar
+**Topik riset:** Klasifikasi Penyakit Daun Tomat Menggunakan CNN dengan Explainable AI Berbasis Grad-CAM
+**Query pencarian:** ("Tomato Leaf Disease" OR "Tomato Disease Detection") AND ("Convolutional Neural Network" OR CNN)
+**Database:** Google Scholar, IEEE Xplore, ScienceDirect
 
-| # | Study | Tahun | Method | Dataset | Result | Limitasi |
-|---|-------|-------|--------|---------|--------|----------|
-| 1 | Saputra et al. | 2023  | CNN LeNet-5 Custom        | 2000 citra daun tomat | Acc 95% | Dataset hanya 4 kelas  |
-| 2 | Wahid et al.   | 2021  | Inception V4              | Citra daun tomat      | Acc 90% | Komputasi tinggi       |
-| 3 | Putri et al.   | 2021  | ANN Backpropagation       | Data daun tomat       | Acc 78% | Ekstraksi fitur manual |
-| 4 | Rosiani et al. | 2020  | K-Means + CNN             | Citra daun jagung     | Acc 90% | Fokus segmentasi       |
-| 5 | Laily          | 2013  | Artificial Neural Network | Daun tembakau         | Acc 73% | Akurasi rendah         |
+| # | Study          | Tahun | Method                    | Dataset               | Result      | Limitasi                                                   |
+| - | -------------- | ----- | ------------------------- | --------------------- | ----------- | ---------------------------------------------------------- |
+| 1 | Saputra et al. | 2023  | CNN LeNet-5 Custom        | 2000 citra daun tomat | Akurasi 95% | Dataset hanya 4 kelas, belum menggunakan Explainable AI    |
+| 2 | Wahid et al.   | 2021  | CNN Inception V4          | Citra daun tomat      | Akurasi 90% | Komputasi lebih tinggi, belum menggunakan Explainable AI   |
+| 3 | Putri et al.   | 2021  | ANN Backpropagation       | Data daun tomat       | Akurasi 78% | Memerlukan ekstraksi fitur manual                          |
+| 4 | Rosiani et al. | 2020  | K-Means Segmentation      | Citra daun jagung     | Akurasi 90% | Fokus pada segmentasi, bukan klasifikasi penyakit tomat    |
+| 5 | Laily          | 2013  | Artificial Neural Network | Daun tembakau         | Akurasi 73% | Akurasi masih rendah dan memerlukan ekstraksi fitur manual |
+
 
 
 **Pola yang terlihat — Metode dominan:** CNN
-**Limitasi yang berulang:** Dataset terbatas, jumlah kelas sedikit, dan risiko overfitting.
+**Limitasi yang berulang:** Jumlah kelas penyakit masih terbatas, model belum menggunakan Explainable AI sehingga hasil prediksi sulit diinterpretasikan (black box), serta pada metode lama masih memerlukan ekstraksi fitur manual.
 ---
 
 ## Latihan 2 — Gap Identification
 
 Berdasarkan tabel di Latihan 1, identifikasi gap.
 
-| Jenis Gap | Ditemukan? | Gap Statement |
-|-----------|-----------|---------------|
-| Performance Gap | [V] Ya / [ ] Tidak | Akurasi model masih menurun pada dataset yang terbatas dan kondisi citra yang beragam |
-| Method Gap | [V] Ya / [ ] Tidak |Sebagian penelitian masih menggunakan metode ANN yang memerlukan ekstraksi fitur manual |
-| Data Gap | [v] Ya / [ ] Tidak | Banyak penelitian hanya menggunakan sedikit kelas penyakit dan jumlah data terbatas|
-| Context Gap | [v] Ya / [ ] Tidak |Model umumnya diuji pada kondisi laboratorium, belum banyak diterapkan pada kondisi nyata di lapangan |
+| **Jenis Gap**       | **Ditemukan?**         | **Gap Statement**                                                                                                                                                                   |
+| ------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Performance Gap** | [ ] Ya / **[✓] Tidak** | Sebagian besar penelitian telah mencapai akurasi yang cukup tinggi (90–95%), sehingga peningkatan akurasi bukan menjadi fokus utama penelitian ini.                                 |
+| **Method Gap**      | **[✓] Ya** / [ ] Tidak | Penelitian sebelumnya belum menerapkan Explainable AI (Grad-CAM), sehingga model CNN masih bersifat *black box* dan belum mampu menjelaskan area citra yang menjadi dasar prediksi. |
+| **Data Gap**        | **[✓] Ya** / [ ] Tidak | Sebagian penelitian hanya menggunakan jumlah kelas penyakit yang terbatas, sehingga kemampuan model dalam mengenali variasi penyakit daun tomat belum optimal.                      |
+| **Context Gap**     | [ ] Ya / **[✓] Tidak** | Penelitian ini masih menggunakan dataset publik sehingga belum berfokus pada pengujian pada kondisi lapangan nyata.                                                                 |
 
-**Gap utama yang dipilih:** Data Gap
+
+**Gap utama yang dipilih:** Method Gap dan Data Gap
 **Mengapa gap ini penting (bukan sekadar "belum ada yang meneliti")?**
->Karena dataset yang terbatas dapat membuat model kurang mampu mengenali variasi penyakit pada kondisi nyata. Akibatnya, performa sistem bisa menurun saat digunakan langsung oleh petani di lapangan sehingga hasil deteksi menjadi kurang akurat dan kurang dapat diandalkan.
+>Method Gap penting karena hasil klasifikasi CNN masih sulit dipahami oleh pengguna. Dengan menambahkan Grad-CAM, model tidak hanya memberikan prediksi, tetapi juga menunjukkan area daun yang menjadi dasar pengambilan keputusan sehingga hasilnya lebih transparan dan dapat dipercaya.
+>Data Gap penting karena penggunaan jumlah kelas penyakit yang lebih banyak memungkinkan model mengenali variasi penyakit daun tomat secara lebih lengkap. Hal ini meningkatkan cakupan klasifikasi dan membuat sistem lebih relevan untuk membantu identifikasi berbagai jenis penyakit daun tomat.
 
 ---
 
@@ -168,13 +176,14 @@ Berdasarkan tabel di Latihan 1, identifikasi gap.
 
 Pilih 2 baseline dari literatur yang sudah dibaca.
 
-| # | Baseline     | Mengapa Relevan                                               | Mengapa Representatif                                          | Apakah SOTA?                       | Sumber               |
-| - | ------------ | ------------------------------------------------------------- | -------------------------------------------------------------- | ---------------------------------- | -------------------- |
-| 1 | LeNet-5 CNN  | Digunakan untuk deteksi penyakit daun tomat berbasis citra    | Banyak dipakai pada penelitian klasifikasi citra sederhana     | Bukan, tetapi masih umum digunakan | Saputra et al., 2023 |
-| 2 | Inception V4 | Memiliki task yang sama yaitu klasifikasi penyakit daun tomat | Digunakan pada penelitian deep learning dengan performa tinggi | Ya, termasuk arsitektur modern     | Wahid et al., 2021   |
+| # | Baseline               | Mengapa Relevan                                                     | Mengapa Representatif                                                     | Apakah SOTA?                                                 | Sumber               |
+| - | ---------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------ | -------------------- |
+| 1 | **CNN LeNet-5 Custom** | Sama-sama melakukan klasifikasi penyakit daun tomat menggunakan CNN | Menjadi penelitian acuan utama dan memiliki performa tinggi (akurasi 95%) | Tidak, tetapi masih menjadi baseline yang relevan            | Saputra et al., 2023 |
+| 2 | **CNN Inception V4**   | Sama-sama menggunakan CNN untuk klasifikasi penyakit daun tomat     | Mewakili arsitektur CNN yang lebih kompleks sebagai pembanding            | Tidak, tetapi merupakan arsitektur CNN yang banyak digunakan | Wahid et al., 2021   |
+
 
 **Apakah pemilihan baseline ini bisa dianggap straw man?** [ ] Ya / [v] Tidak
-> Justifikasi: Baseline dipilih dari metode yang memang digunakan pada penelitian serupa dan memiliki relevansi langsung dengan tugas klasifikasi penyakit daun tomat, sehingga perbandingan dilakukan secara adil dan realistis.
+> Justifikasi: Kedua baseline dipilih karena memiliki tujuan penelitian yang sama, yaitu klasifikasi penyakit daun tomat menggunakan CNN. Selain itu, kedua penelitian berasal dari literatur yang relevan dan memiliki performa yang baik sehingga layak dijadikan pembanding. Dengan demikian, perbandingan dilakukan terhadap metode yang representatif, bukan metode yang sengaja dipilih karena memiliki performa rendah.
 
 ---
 
@@ -183,7 +192,6 @@ Pilih 2 baseline dari literatur yang sudah dibaca.
 > Apa perbedaan antara "belum ada yang meneliti ini" (klaim tanpa bukti) dengan research gap yang valid? Bagaimana cara membuktikan bahwa sebuah gap benar-benar ada?
 
 **Jawaban:**
-> “Belum ada yang meneliti ini” hanya berupa asumsi tanpa bukti dari literatur. Sedangkan research gap yang valid harus didukung hasil analisis beberapa penelitian, misalnya adanya keterbatasan metode, data, performa, atau konteks yang belum teratasi.
+> Pernyataan "belum ada yang meneliti" merupakan klaim yang tidak cukup kuat karena belum didukung oleh bukti dari hasil studi literatur. Sebaliknya, research gap harus didasarkan pada analisis beberapa penelitian sebelumnya sehingga dapat menunjukkan keterbatasan yang masih ada, misalnya keterbatasan metode, data, performa, atau konteks penelitian. Untuk membuktikan bahwa suatu gap benar-benar ada, perlu dilakukan telaah literatur secara sistematis dan membandingkan hasil, metode, dataset, serta keterbatasan dari penelitian-penelitian terdahulu.
 
-Cara membuktikannya adalah dengan melakukan studi literatur, membandingkan hasil penelitian sebelumnya, lalu menunjukkan pola kekurangan atau masalah yang masih muncul secara konsisten.
 
