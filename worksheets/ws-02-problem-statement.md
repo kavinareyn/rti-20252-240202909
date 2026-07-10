@@ -67,8 +67,8 @@ Masalah riset yang layak harus memenuhi 5 kriteria:
 PROBLEM STATEMENT BUILDER
 
 Domain & Konteks
-  Domain   : Pertanian / Artificial Intelligence
-  Konteks  : Deteksi penyakit daun tomat menggunakan CNN
+  Domain   : Artificial Intelligence, Computer Vision, dan Pertanian Presisi
+  Konteks  : Klasifikasi multikelas penyakit daun tomat menggunakan Convolutional Neural Network (CNN) dengan Explainable AI berbasis Grad-CAM.
 
 System Context
   Input       : Citra digital daun tomat dari dataset PlantVillage.
@@ -124,7 +124,7 @@ Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Pro
 Gambarkan konteks sistem dari masalah riset di Latihan 1.
 
 | Komponen | Deskripsi |
-|----------|----------|st 
+|----------|----------|
 | Input | Citra digital daun tomat dari dataset PlantVillage yang terdiri atas beberapa kelas penyakit dan daun sehat. |
 | Process | Melakukan preprocessing citra, pelatihan model CNN, klasifikasi penyakit daun tomat, evaluasi model, dan visualisasi hasil prediksi menggunakan Grad-CAM. |
 |Output| Prediksi jenis penyakit daun tomat, nilai Accuracy, Precision, Recall, F1-score, Confusion Matrix, serta heatmap Grad-CAM. |
