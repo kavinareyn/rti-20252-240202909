@@ -75,7 +75,7 @@ Research Question:
   Variabel IV  : Jenis arsitektur CNN, Penerapan Grad-CAM, Jumlah kelas penyakit
   Variabel DV  : Accuracy, Precision, Recall, F1-score, Confusion Matrix, dan interpretasi visual hasil prediksi (Grad-CAM).
   Metrik       : Accuracy, Precision, Recall, F1-score, Confusion Matrix, dan visualisasi Grad-CAM.
-  Dataset      : PlantVillage Tomato Leaf Disease Dataset.
+  Dataset      : Tomato Diseases
   Baseline     : LeNet-5 CNN Custom, Inception V4
 
 Quality Check RQ:
@@ -114,14 +114,14 @@ Gunakan gap yang ditemukan di WS-03. Transformasikan menjadi Research Question.
 | Metode spesifik | **Ya** | CNN dengan Grad-CAM                                                             |
 | Metrik terukur  | **Ya** | Accuracy, Precision, Recall, F1-score, Confusion Matrix                         |
 | Baseline        | **Ya** | CNN LeNet-5 Custom (Saputra et al., 2023) dan Inception V4 (Wahid et al., 2021) |
-| Dataset/konteks | **Ya** | Dataset PlantVillage (penyakit daun tomat)                                      |
+| Dataset/konteks | **Ya** | Dataset Tomato Diseases (penyakit daun tomat)                                      |
 
 
 
 **Tipe RQ:** [ ] Comparison / [v] Improvement / [ ] Exploratory
 
 **RQ versi revisi (setelah evaluasi):**
-> Bagaimana performa model Convolutional Neural Network (CNN) yang dipadukan dengan Grad-CAM dalam mengklasifikasikan berbagai jenis penyakit daun tomat pada dataset PlantVillage berdasarkan metrik Accuracy, Precision, Recall, F1-score, dan Confusion Matrix dibandingkan dengan penelitian sebelumnya?
+> Bagaimana performa model Convolutional Neural Network (CNN) yang dipadukan dengan Grad-CAM dalam mengklasifikasikan berbagai jenis penyakit daun tomat pada dataset Tomato Diseases berdasarkan metrik Accuracy, Precision, Recall, F1-score, dan Confusion Matrix dibandingkan dengan penelitian sebelumnya?
 
 ---
 
@@ -150,12 +150,12 @@ Lengkapi rantai dari RQ hingga metode analisis.
 
 | **Tahap**           | **Isi**                                                                                                                                                                                                                                                                                                                    |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **RQ**              | Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat pada dataset PlantVillage berdasarkan metrik Accuracy, Precision, Recall, F1-score, dan Confusion Matrix, serta bagaimana Grad-CAM dapat memvisualisasikan area yang menjadi dasar prediksi model? |
+| **RQ**              | Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat pada dataset Tomato Diseases berdasarkan metrik Accuracy, Precision, Recall, F1-score, dan Confusion Matrix, serta bagaimana Grad-CAM dapat memvisualisasikan area yang menjadi dasar prediksi model? |
 | **Variable (IV)**   | Arsitektur CNN dan jumlah kelas penyakit daun tomat.                                                                                                                                                                                                                                                                       |
 | **Variable (DV)**   | Performa klasifikasi model yang diukur menggunakan Accuracy, Precision, Recall, F1-score, dan Confusion Matrix.                                                                                                                                                                                                            |
 | **Metric**          | Accuracy, Precision, Recall, F1-score, dan Confusion Matrix.                                                                                                                                                                                                                                                               |
-| **Data source**     | PlantVillage Tomato Leaf Disease Dataset.                                                                                                                                                                                                                                                                                  |
-| **Analysis method** | Melatih model CNN menggunakan dataset PlantVillage, mengevaluasi performa model menggunakan Accuracy, Precision, Recall, F1-score, dan Confusion Matrix, kemudian menerapkan Grad-CAM untuk memvisualisasikan area citra yang menjadi dasar prediksi serta membandingkan hasilnya dengan penelitian baseline.              |
+| **Data source**     | Tomato Diseases Dataset.                                                                                                                                                                                                                                                                                  |
+| **Analysis method** | Melatih model CNN menggunakan dataset Tomato Diseases, mengevaluasi performa model menggunakan Accuracy, Precision, Recall, F1-score, dan Confusion Matrix, kemudian menerapkan Grad-CAM untuk memvisualisasikan area citra yang menjadi dasar prediksi serta membandingkan hasilnya dengan penelitian baseline.              |
 
   
 
