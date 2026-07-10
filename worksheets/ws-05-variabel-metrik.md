@@ -66,13 +66,13 @@ Metrik harus ditentukan **sebelum** eksperimen. Memilih metrik setelah melihat d
 ```
 VARIABLE & METRIC DEFINITION
 
-Research Question: Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat pada dataset PlantVillage serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model?
+Research Question: Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat menggunakan dataset Tomato Diseases serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model?
 
 | Variabel             | Tipe | Konsep                                                       | Metrik                                                  | Skala   | Satuan | Cara Mengukur                                                      | Justifikasi                                                       |
 | -------------------- | ---- | ------------------------------------------------------------ | ------------------------------------------------------- | ------- | ------ | ------------------------------------------------------------------ | ----------------------------------------------------------------- |
 | Model CNN            | IV   | Model klasifikasi penyakit daun tomat berbasis CNN           | Arsitektur CNN yang digunakan                           | Nominal | -      | Mengimplementasikan satu model CNN untuk proses klasifikasi        | Model CNN merupakan metode utama yang digunakan dalam penelitian. |
 | Performa klasifikasi | DV   | Kemampuan model dalam mengklasifikasikan penyakit daun tomat | Accuracy, Precision, Recall, F1-score, Confusion Matrix | Rasio   | %      | Menguji model menggunakan data uji dan menghitung metrik evaluasi  | Digunakan untuk mengetahui tingkat keberhasilan model.            |
-| Dataset PlantVillage | CV   | Dataset yang digunakan selama pelatihan dan pengujian        | Dataset tetap                                           | Nominal | -      | Menggunakan dataset PlantVillage yang sama pada seluruh eksperimen | Menjaga konsistensi hasil penelitian.                             |
+| Dataset Tomato Diseases | CV   | Dataset yang digunakan selama pelatihan dan pengujian        | Dataset tetap                                           | Nominal | -      | Menggunakan dataset Tomato Diseases yang sama pada seluruh eksperimen | Menjaga konsistensi hasil penelitian.                             |
 
 
 
@@ -90,13 +90,13 @@ Alignment Check:
 
 Gunakan RQ dari WS-04. Definisikan variabel dan metriknya.
 
-**RQ:** Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat pada dataset PlantVillage serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model?
+**RQ:** Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat menggunakan dataset Tomato Diseases serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model?
 
 | Variabel             | Tipe | Konsep Abstrak                                         | Metrik Konkret                                          | Skala (NOIR) | Satuan |
 | -------------------- | ---- | ------------------------------------------------------ | ------------------------------------------------------- | ------------ | ------ |
 | Model CNN            | IV   | Metode klasifikasi penyakit daun tomat                 | Implementasi CNN (MobileNetV2)                          | Nominal      | —      |
 | Performa klasifikasi | DV   | Kemampuan model mengklasifikasikan penyakit daun tomat | Accuracy, Precision, Recall, F1-score, Confusion Matrix | Rasio        | %      |
-| Dataset PlantVillage | CV   | Dataset yang digunakan selama eksperimen               | Dataset PlantVillage (10 kelas penyakit daun tomat)     | Nominal      | —      |
+| Dataset Tomato Deseases | CV   | Dataset yang digunakan selama eksperimen               | Dataset Tomato Deseases  (10 kelas penyakit daun tomat)     | Nominal      | —      |
 
 
 
