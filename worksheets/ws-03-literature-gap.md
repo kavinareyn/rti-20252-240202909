@@ -97,7 +97,7 @@ Literature Matrix (concept-centric):
 
 Pola yang ditemukan:
   Metode dominan     : Convolutional Neural Network (CNN)
-  Dataset umum       : Dataset citra daun tomat (PlantVillage)
+  Dataset umum       : Dataset citra daun tomat (Tomato Diseases)
   Limitasi berulang  : Jumlah kelas penyakit masih terbatas dan model belum menyediakan interpretasi hasil prediksi (black box).
 
 GAP IDENTIFICATION
