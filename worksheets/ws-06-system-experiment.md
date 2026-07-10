@@ -80,26 +80,35 @@ Jika variabel tidak bisa di-map ke komponen apapun → arsitektur perlu didesain
 ```
 SYSTEM-EXPERIMENT MAPPING
 
-Research Question: Apakah penggunaan CNN Custom dapat meningkatkan akurasi deteksi penyakit daun tomat dibandingkan LeNet-5?
+Research Question: Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat menggunakan dataset Tomato Diseases serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model?
 
 Variable → Component Mapping:
-| Variabel                 | Tipe | Komponen Sistem      | Cara Manipulasi/Pengukuran                                        |
-| ------------------------ | ---- | -------------------- | ----------------------------------------------------------------- |
-| Jenis arsitektur CNN     | IV   | Model klasifikasi    | Mengganti model LeNet-5 dengan CNN Custom                         |
-| Akurasi deteksi penyakit | DV   | Modul evaluasi model | Mengukur accuracy, precision, recall menggunakan confusion matrix |
-| Dataset citra daun tomat | CV   | Dataset input        | Menggunakan dataset yang sama untuk semua model                   |
+| Variabel                | Tipe | Komponen Sistem          | Cara Manipulasi/Pengukuran                                                                                                         |
+| ----------------------- | ---- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Model CNN               | IV   | Modul klasifikasi CNN    | Mengimplementasikan model CNN untuk melakukan pelatihan dan pengujian klasifikasi penyakit daun tomat.                             |
+| Performa klasifikasi    | DV   | Modul evaluasi model     | Mengukur hasil klasifikasi menggunakan Accuracy, Precision, Recall, F1-score, dan Confusion Matrix.                                |
+| Dataset Tomato Diseases | CV   | Dataset citra daun tomat | Menggunakan dataset Tomato Diseases yang sama pada seluruh proses pelatihan dan pengujian agar kondisi eksperimen tetap konsisten. |
+
 
 
 4 Prinsip Desain:
-  [v] Traceability — Setiap komponen bisa ditelusuri ke variabel
-  [v] Variable Isolation — IV bisa diubah tanpa mengubah CV
-  [v] Measurement Integration — Pengukuran DV built-in
-  [v] Reproducibility — Setup bisa direkonstruksi
+  [v] Traceability — Setiap komponen sistem dapat ditelusuri ke variabel penelitian.
+  [v] Variable Isolation — Model CNN diterapkan pada dataset yang sama sehingga kondisi eksperimen tetap konsisten.
+  [v] Measurement Integration — Pengukuran performa dilakukan menggunakan Accuracy, Precision, Recall, F1-score, dan Confusion Matrix.
+  [v] Reproducibility — Dataset, parameter, dan tahapan eksperimen dapat digunakan kembali untuk mereplikasi penelitian.
 
 Experimental Setup:
-  Input data     : citra daun tomat
-  Parameter      : Epoch, learning rate, batch size
-  Output format  : Nilai accuracy, precision, recall, dan confusion matrix
+  Input data     : Dataset Tomato Diseases yang diperoleh dari Kaggle.
+  Parameter      : Model CNN
+ -Ukuran citra: 224 × 224 piksel
+ -Batch size: 32
+ -Epoch: 20
+ -Optimizer: Adam
+ -Learning rate: 0,001
+  Output format  : Prediksi kelas penyakit daun tomat
+ -Nilai Accuracy, Precision, Recall, F1-score
+ -Confusion Matrix
+ -Visualisasi heatmap Grad-CAM
 ```
 
 ---
@@ -108,13 +117,13 @@ Experimental Setup:
 
 Gunakan RQ dan variabel dari WS-05. Petakan ke komponen sistem.
 
-**RQ:** Apakah penggunaan CNN Custom dapat meningkatkan akurasi deteksi penyakit daun tomat dibandingkan LeNet-5?
+**RQ:** Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat menggunakan dataset Tomato Diseases serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model?
 
-| Variabel                 | Tipe | Komponen Sistem       | Cara Manipulasi / Pengukuran                                          |
-| ------------------------ | ---- | --------------------- | --------------------------------------------------------------------- |
-| Jenis arsitektur CNN     | IV   | Modul klasifikasi CNN | Mengganti model LeNet-5 dengan CNN Custom                             |
-| Akurasi deteksi penyakit | DV   | Modul evaluasi model  | Mengukur accuracy, precision, dan recall menggunakan confusion matrix |
-| Dataset citra daun tomat | CV   | Dataset input         | Menggunakan dataset yang sama pada semua model                        |
+| Variabel                | Tipe | Komponen Sistem          | Cara Manipulasi / Pengukuran                                                                                       |
+| ----------------------- | ---- | ------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Model CNN               | IV   | Modul klasifikasi CNN    | Mengimplementasikan model CNN untuk melakukan proses pelatihan dan klasifikasi citra daun tomat.                   |
+| Performa klasifikasi    | DV   | Modul evaluasi model     | Mengukur Accuracy, Precision, Recall, F1-score, dan Confusion Matrix dari hasil prediksi model.                    |
+| Dataset Tomato Diseases | CV   | Dataset citra daun tomat | Menggunakan dataset yang sama pada seluruh proses pelatihan dan pengujian agar kondisi eksperimen tetap konsisten. |
 
 
 **Apakah semua variabel bisa di-map?** [v] Ya / [ ] Tidak
@@ -126,18 +135,18 @@ Gunakan RQ dan variabel dari WS-05. Petakan ke komponen sistem.
 
 Evaluasi desain sistem terhadap 4 prinsip.
 
-| Prinsip         | Status | Bukti / Penjelasan                                                                         |
-| --------------- | ------ | ------------------------------------------------------------------------------------------ |
-| Traceability    | ✅      | Setiap variabel terhubung dengan komponen sistem seperti modul CNN, dataset, dan evaluasi  |
-| Modularity      | ✅      | Model CNN dapat diganti antara LeNet-5 dan CNN Custom tanpa mengubah sistem utama          |
-| Controllability | ✅      | Variabel kontrol seperti dataset dan parameter training dijaga tetap sama                  |
-| Measurability   | ✅      | Performa sistem dapat diukur menggunakan accuracy, precision, recall, dan confusion matrix |
+| Prinsip             | Status | Bukti / Penjelasan                                                                                                                                                                                    |
+| ------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Traceability**    | ✅      | Setiap variabel penelitian memiliki komponen sistem yang sesuai, yaitu model CNN sebagai metode klasifikasi, modul evaluasi untuk mengukur performa, dan dataset Tomato Diseases sebagai sumber data. |
+| **Modularity**      | ✅      | Sistem dibagi menjadi beberapa modul, yaitu preprocessing, klasifikasi CNN, evaluasi model, dan visualisasi Grad-CAM sehingga setiap modul memiliki fungsi yang berbeda.                              |
+| **Controllability** | ✅      | Parameter pelatihan seperti ukuran citra, jumlah epoch, batch size, dan learning rate dapat diatur tanpa mengubah struktur sistem secara keseluruhan.                                                 |
+| **Measurability**   | ✅      | Performa sistem dapat diukur menggunakan Accuracy, Precision, Recall, F1-score, Confusion Matrix, serta visualisasi Grad-CAM sebagai analisis interpretabilitas.                                      |
 
 
-**Prinsip mana yang paling sulit dipenuhi?** Controllability
+
+**Prinsip mana yang paling sulit dipenuhi?** Measurability
 **Strategi untuk mengatasinya:**
->Menggunakan dataset, parameter, dan lingkungan pengujian yang sama agar hasil perbandingan model tetap adil dan konsisten.
-
+>Menggunakan metrik evaluasi yang umum digunakan pada klasifikasi citra (Accuracy, Precision, Recall, F1-score, dan Confusion Matrix) serta memanfaatkan Grad-CAM untuk membantu menjelaskan hasil prediksi model.
 ---
 
 ## Latihan 3 — Ablation Study Planning
@@ -147,17 +156,18 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 > **Panduan jumlah kondisi:** Untuk 3 komponen (A, B, C), kondisi minimal yang direkomendasikan:
 > Full + (-A) + (-B) + (-C) = **4 kondisi dasar**. Jika waktu memungkinkan, tambahkan kombinasi ganda: (-A,-B), (-A,-C), (-B,-C) = **7 kondisi**. Sesuaikan dengan *computational cost* dan tenggat waktu penelitian.
 
-| Kondisi | Komponen A        | Komponen B            | Komponen C               | Hasil yang Diharapkan                                   |
-| ------- | ----------------- | --------------------- | ------------------------ | ------------------------------------------------------- |
-| Full    | ✅ CNN Custom      | ✅ Data preprocessing  | ✅ Hyperparameter tuning  | Akurasi terbaik sebagai baseline penuh                  |
-| – A     | ❌ LeNet-5 standar | ✅                     | ✅                        | Akurasi menurun dibanding CNN Custom                    |
-| – B     | ✅                 | ❌ Tanpa preprocessing | ✅                        | Model kurang stabil karena kualitas citra tidak seragam |
-| – C     | ✅                 | ✅                     | ❌ Tanpa tuning parameter | Akurasi menurun karena parameter tidak optimal          |
+| Kondisi  | Komponen A (CNN) | Komponen B (Preprocessing) | Komponen C (Grad-CAM) | Hasil yang Diharapkan                                                                                 |
+| -------- | ---------------- | -------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Full** | ✅ CNN            | ✅ Preprocessing            | ✅ Grad-CAM            | Model menghasilkan performa terbaik dan dapat memberikan visualisasi area prediksi.                   |
+| **− A**  | ❌ Tanpa CNN      | ✅ Preprocessing            | ✅ Grad-CAM            | Sistem tidak dapat melakukan klasifikasi penyakit daun tomat karena tidak memiliki model klasifikasi. |
+| **− B**  | ✅ CNN            | ❌ Tanpa preprocessing      | ✅ Grad-CAM            | Performa klasifikasi diperkirakan menurun karena kualitas input tidak seragam.                        |
+| **− C**  | ✅ CNN            | ✅ Preprocessing            | ❌ Tanpa Grad-CAM      | Performa klasifikasi tetap dapat diukur, tetapi hasil prediksi tidak dapat dijelaskan secara visual.  |
 
 
-**Komponen mana yang diprediksi paling berkontribusi?** Komponen A (CNN Custom)
+
+**Komponen mana yang diprediksi paling berkontribusi?** CNN
 **Mengapa?**
-> Karena arsitektur model CNN paling berpengaruh terhadap kemampuan sistem dalam mengenali pola penyakit pada citra daun tomat sehingga berdampak langsung pada peningkatan akurasi deteksi.
+> Karena CNN merupakan komponen utama yang melakukan proses ekstraksi fitur dan klasifikasi penyakit daun tomat. Tanpa CNN, sistem tidak dapat menghasilkan prediksi, sedangkan preprocessing dan Grad-CAM berfungsi sebagai pendukung untuk meningkatkan kualitas input dan interpretasi hasil.
 
 ---
 
@@ -166,7 +176,5 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 > Apa risiko jika sistem dibangun seperti produk (monolitik, fitur lengkap) lalu baru dilakukan eksperimen? Mengapa arsitektur modular penting untuk riset?
 
 **Jawaban:**
-Jika sistem langsung dibangun seperti produk yang monolitik dan penuh fitur, akan sulit mengetahui komponen mana yang sebenarnya mempengaruhi hasil eksperimen. Perubahan kecil pada satu bagian juga bisa memengaruhi bagian lain sehingga hasil penelitian menjadi kurang jelas dan sulit dievaluasi.
-
-Arsitektur modular penting dalam riset karena setiap komponen dapat diuji, diganti, atau dihapus secara terpisah. Dengan begitu, peneliti lebih mudah melakukan eksperimen, ablation study, dan membuktikan pengaruh tiap komponen terhadap hasil penelitian.
+>Membangun sistem secara monolitik sejak awal memiliki risiko karena jika terjadi kesalahan atau hasil eksperimen tidak sesuai harapan, seluruh sistem harus diperbaiki sehingga membutuhkan waktu dan usaha yang lebih besar. Selain itu, akan sulit mengetahui komponen mana yang menyebabkan penurunan performa. Oleh karena itu, arsitektur modular penting dalam penelitian karena setiap komponen, seperti preprocessing, model CNN, evaluasi, dan Grad-CAM, dapat dikembangkan, diuji, dan diperbaiki secara terpisah. Pendekatan ini membuat proses eksperimen lebih mudah, hasil lebih mudah dianalisis, serta penelitian lebih mudah direproduksi oleh peneliti lain.
 
