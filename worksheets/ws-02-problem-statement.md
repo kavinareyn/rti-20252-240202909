@@ -71,11 +71,11 @@ Domain & Konteks
   Konteks  : Klasifikasi multikelas penyakit daun tomat menggunakan Convolutional Neural Network (CNN) dengan Explainable AI berbasis Grad-CAM.
 
 System Context
-  Input       : Citra digital daun tomat dari dataset PlantVillage.
+  Input       : Citra digital daun tomat dari dataset Tomato Diseases.
   Process     : Preprocessing citra, pelatihan model CNN, klasifikasi penyakit daun tomat, evaluasi model, dan visualisasi hasil menggunakan Grad-CAM.
   Output      : Prediksi jenis penyakit daun tomat, nilai evaluasi model (Accuracy, Precision, Recall, F1-score, Confusion Matrix), serta visualisasi heatmap Grad-CAM.
   Outcome     : Sistem mampu mengklasifikasikan lebih banyak jenis penyakit daun tomat dan memberikan interpretasi visual terhadap hasil prediksi model.
-  Constraints : Dataset terbatas pada citra daun tomat, implementasi menggunakan satu arsitektur CNN, dan evaluasi dilakukan pada dataset PlantVillage.
+  Constraints : Dataset terbatas pada citra daun tomat, implementasi menggunakan satu arsitektur CNN, dan evaluasi dilakukan pada dataset Tomato Diseases.
   Stakeholders: Petani, penyuluh pertanian, peneliti, dan akademisi.
 
 Fenomena → Problem
@@ -125,11 +125,11 @@ Gambarkan konteks sistem dari masalah riset di Latihan 1.
 
 | Komponen | Deskripsi |
 |----------|----------|
-| Input | Citra digital daun tomat dari dataset PlantVillage yang terdiri atas beberapa kelas penyakit dan daun sehat. |
+| Input | Citra digital daun tomat dari dataset Tomato Diseases yang terdiri atas beberapa kelas penyakit dan daun sehat. |
 | Process | Melakukan preprocessing citra, pelatihan model CNN, klasifikasi penyakit daun tomat, evaluasi model, dan visualisasi hasil prediksi menggunakan Grad-CAM. |
 |Output| Prediksi jenis penyakit daun tomat, nilai Accuracy, Precision, Recall, F1-score, Confusion Matrix, serta heatmap Grad-CAM. |
 | Outcome |Sistem mampu mengklasifikasikan lebih banyak jenis penyakit daun tomat dan memberikan interpretasi visual terhadap hasil prediksi sehingga meningkatkan transparansi model. |
-| Constraints |Dataset terbatas pada citra daun tomat, implementasi menggunakan satu arsitektur CNN, spesifikasi perangkat keras terbatas, dan evaluasi dilakukan menggunakan dataset PlantVillage. |
+| Constraints |Dataset terbatas pada citra daun tomat, implementasi menggunakan satu arsitektur CNN, spesifikasi perangkat keras terbatas, dan evaluasi dilakukan menggunakan dataset Tomato Diseases. |
 | Stakeholders |Petani, penyuluh pertanian, peneliti, akademisi, dan pengembang sistem pertanian cerdas. |
 
 **Komponen mana yang paling relevan dengan masalah riset?** Process, karena fokus penelitian adalah mengembangkan proses klasifikasi menggunakan CNN serta menambahkan Grad-CAM untuk meningkatkan interpretabilitas hasil prediksi.
@@ -145,7 +145,7 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 | **Clarity**       | **5**          | Permasalahan telah dijelaskan secara spesifik, yaitu keterbatasan jumlah kelas penyakit dan belum adanya interpretasi hasil klasifikasi.                           |
 | **Measurability** | **5**          | Keberhasilan penelitian dapat diukur menggunakan Accuracy, Precision, Recall, F1-score, Confusion Matrix, serta visualisasi Grad-CAM.                              |
 | **Relevance**     | **5**          | Penelitian relevan dengan bidang Artificial Intelligence, Computer Vision, dan pertanian karena mendukung identifikasi penyakit daun tomat.                        |
-| **Testability**   | **5**          | Hipotesis dapat diuji melalui implementasi CNN, pengujian pada dataset PlantVillage, dan evaluasi menggunakan metrik klasifikasi serta hasil visualisasi Grad-CAM. |
+| **Testability**   | **5**          | Hipotesis dapat diuji melalui implementasi CNN, pengujian pada dataset Tomato Diseases, dan evaluasi menggunakan metrik klasifikasi serta hasil visualisasi Grad-CAM. |
 | **Impact**        | **5**          | Penelitian memberikan kontribusi dengan memperluas cakupan klasifikasi penyakit dan meningkatkan interpretabilitas model melalui Explainable AI.                   |
 
 
