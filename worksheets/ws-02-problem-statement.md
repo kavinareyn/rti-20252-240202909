@@ -71,19 +71,21 @@ Domain & Konteks
   Konteks  : Deteksi penyakit daun tomat menggunakan CNN
 
 System Context
-  Input       : Citra daun tomat
-  Process     : Pengolahan citra dan klasifikasi menggunakan CNN
-  Output      : Jenis penyakit daun tomat
-  Outcome     : Membantu identifikasi penyakit lebih cepat dan akurat
-  Constraints : Dataset terbatas, variasi pencahayaan dan kualitas citra
-  Stakeholders: Petani, peneliti, pengembang sistem pertanian
+  Input       : Citra digital daun tomat dari dataset PlantVillage.
+  Process     : Preprocessing citra, pelatihan model CNN, klasifikasi penyakit daun tomat, evaluasi model, dan visualisasi hasil menggunakan Grad-CAM.
+  Output      : Prediksi jenis penyakit daun tomat, nilai evaluasi model (Accuracy, Precision, Recall, F1-score, Confusion Matrix), serta visualisasi heatmap Grad-CAM.
+  Outcome     : Sistem mampu mengklasifikasikan lebih banyak jenis penyakit daun tomat dan memberikan interpretasi visual terhadap hasil prediksi model.
+  Constraints : Dataset terbatas pada citra daun tomat, implementasi menggunakan satu arsitektur CNN, dan evaluasi dilakukan pada dataset PlantVillage.
+  Stakeholders: Petani, penyuluh pertanian, peneliti, dan akademisi.
 
 Fenomena → Problem
-  Fenomena yang diamati             : Petani kesulitan membedakan penyakit daun tomat karena gejalanya mirip
-  Gejala (symptom) yang terukur     : Tingginya kesalahan identifikasi penyakit secara manual
-  Masalah yang didiagnosis          : Proses identifikasi penyakit masih lambat dan kurang akurat
-  Masalah riset (researchable)      : Bagaimana meningkatkan akurasi deteksi penyakit daun tomat menggunakan CNN?
-  Variabel yang terukur             : Akurasi, precision, recall, waktu proses
+  Fenomena yang diamati             : Model CNN telah mampu mengklasifikasikan penyakit daun tomat, namun penelitian sebelumnya hanya mencakup empat jenis penyakit dan belum memberikan penjelasan terhadap proses pengambilan keputusan model.
+  Gejala (symptom) yang terukur     : Jumlah kelas penyakit terbatas, hasil klasifikasi hanya berupa label, dan tidak tersedia visualisasi area citra yang menjadi dasar prediksi.
+  Masalah yang didiagnosis          : Kemampuan klasifikasi penyakit daun tomat masih terbatas dan model bersifat black box sehingga hasil prediksi sulit diinterpretasikan.
+  Masalah riset (researchable)      : Bagaimana mengembangkan model CNN yang mampu mengklasifikasikan lebih banyak jenis penyakit daun tomat serta memberikan interpretasi visual terhadap hasil prediksi menggunakan Grad-CAM?
+  Variabel yang terukur             : 
+  - Variabel bebas: Arsitektur CNN, jumlah kelas penyakit, penerapan Grad-CAM.
+  - Variabel terikat: Accuracy, Precision, Recall, F1-score, Confusion Matrix, dan visualisasi Grad-CAM.
 
 Problem Quality Check
   [v] Clarity — Apakah satu orang membaca akan paham?
@@ -93,7 +95,7 @@ Problem Quality Check
   [v] Impact — Apakah ada kontribusi jika terjawab?
 
 Problem Statement (1 paragraf):
-Identifikasi penyakit daun tomat secara manual masih sulit dilakukan karena beberapa penyakit memiliki gejala yang mirip, sehingga dapat menyebabkan kesalahan diagnosis dan menurunkan kualitas hasil panen. Penelitian ini bertujuan mengembangkan metode Convolutional Neural Network (CNN) untuk mendeteksi jenis penyakit daun tomat berdasarkan citra digital dengan tingkat akurasi yang lebih tinggi dan proses identifikasi yang lebih cepat dibandingkan metode manual.
+Penelitian sebelumnya telah menerapkan Convolutional Neural Network (CNN) untuk mengklasifikasikan penyakit daun tomat dengan tingkat akurasi yang baik, namun cakupan klasifikasi masih terbatas pada empat jenis penyakit dan hasil prediksi yang diberikan belum dapat dijelaskan karena model masih bersifat black box. Keterbatasan tersebut menyebabkan sistem belum mampu mengenali variasi penyakit daun tomat yang lebih luas serta belum memberikan informasi mengenai area citra yang menjadi dasar pengambilan keputusan model. Oleh karena itu, diperlukan pengembangan model CNN yang mampu mengklasifikasikan lebih banyak jenis penyakit daun tomat dengan menambahkan metode Explainable Artificial Intelligence berbasis Grad-CAM sehingga hasil klasifikasi tidak hanya memiliki performa yang baik, tetapi juga dapat diinterpretasikan melalui visualisasi area citra yang berkontribusi terhadap prediksi model.
 ```
 
 ---
@@ -102,15 +104,15 @@ Identifikasi penyakit daun tomat secara manual masih sulit dilakukan karena bebe
 
 Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Problem Formation Model.
 
-**Topik awal:** ________________________________________
+**Topik awal:** Klasifikasi Penyakit Daun Tomat Menggunakan Convolutional Neural Network (CNN) dengan Explainable AI Berbasis Grad-CAM
 
 | Tahap | Hasil |
 |-------|-------|
-| Reality | Petani sering kesulitan mengenali penyakit pada daun tanaman secara cepat dan tepat|
-| Observed Issue (Symptom) | Tingginya kesalahan identifikasi penyakit daun secara manual |
-| Diagnosed Problem (Root Cause) |Gejala penyakit memiliki kemiripan dan identifikasi masih bergantung pada pengamatan manusia |
-| Researchable Problem |Bagaimana meningkatkan akurasi deteksi penyakit daun tanaman menggunakan metode CNN? |
-| Measurable Variable |Akurasi, precision, recall, dan waktu deteksi|
+| Reality | Identifikasi penyakit daun tomat menggunakan CNN telah banyak dilakukan, namun sebagian besar penelitian hanya mengenali beberapa jenis penyakit dan hanya menghasilkan prediksi tanpa penjelasan.|
+| Observed Issue (Symptom) | Model hanya mengklasifikasikan 4 jenis penyakit dan hasil prediksi tidak menunjukkan area daun yang menjadi dasar pengambilan keputusan. |
+| Diagnosed Problem (Root Cause) |Cakupan dataset penyakit yang digunakan masih terbatas dan belum diterapkannya metode Explainable AI sehingga model bersifat black box. |
+| Researchable Problem |Bagaimana mengembangkan model CNN yang mampu mengklasifikasikan lebih banyak jenis penyakit daun tomat serta memberikan interpretasi visual terhadap hasil prediksi menggunakan Grad-CAM? |
+| Measurable Variable |Accuracy, Precision, Recall, F1-score, Confusion Matrix, jumlah kelas penyakit yang diklasifikasikan, dan visualisasi Grad-CAM.|
 
 **Apakah terjebak solution-first thinking?** [ ] Ya / [v] Tidak
 > Jika ya, kembali ke tahap mana? ________________________
@@ -123,14 +125,14 @@ Gambarkan konteks sistem dari masalah riset di Latihan 1.
 
 | Komponen | Deskripsi |
 |----------|----------|st 
-| Input | Citra daun tanaman tomat |
-| Process | Pengolahan citra dan klasifikasi penyakit menggunakan CNN|
-| Output |Hasil deteksi jenis penyakit daun tomat |
-| Outcome |Membantu petani melakukan identifikasi penyakit lebih cepat dan akurat |
-| Constraints |Dataset terbatas, kualitas citra berbeda-beda, dan kebutuhan komputasi |
-| Stakeholders |Petani, peneliti, dan pengembang sistem AI pertanian |
+| Input | Citra digital daun tomat dari dataset PlantVillage yang terdiri atas beberapa kelas penyakit dan daun sehat. |
+| Process | Melakukan preprocessing citra, pelatihan model CNN, klasifikasi penyakit daun tomat, evaluasi model, dan visualisasi hasil prediksi menggunakan Grad-CAM. |
+|Output| Prediksi jenis penyakit daun tomat, nilai Accuracy, Precision, Recall, F1-score, Confusion Matrix, serta heatmap Grad-CAM. |
+| Outcome |Sistem mampu mengklasifikasikan lebih banyak jenis penyakit daun tomat dan memberikan interpretasi visual terhadap hasil prediksi sehingga meningkatkan transparansi model. |
+| Constraints |Dataset terbatas pada citra daun tomat, implementasi menggunakan satu arsitektur CNN, spesifikasi perangkat keras terbatas, dan evaluasi dilakukan menggunakan dataset PlantVillage. |
+| Stakeholders |Petani, penyuluh pertanian, peneliti, akademisi, dan pengembang sistem pertanian cerdas. |
 
-**Komponen mana yang paling relevan dengan masalah riset?** Process (proses klasifikasi menggunakan CNN)
+**Komponen mana yang paling relevan dengan masalah riset?** Process, karena fokus penelitian adalah mengembangkan proses klasifikasi menggunakan CNN serta menambahkan Grad-CAM untuk meningkatkan interpretabilitas hasil prediksi.
 
 ---
 
@@ -138,18 +140,19 @@ Gambarkan konteks sistem dari masalah riset di Latihan 1.
 
 Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 
-| Kriteria | Skor (1-5) | Justifikasi |
-|----------|-----------|-------------|
-| Clarity | 4 | Masalah sudah jelas, tetapi spesifikasi dataset dan jenis penyakit masih bisa diperjelas|
-| Measurability |5 | Menggunakan metrik terukur seperti akurasi, precision, dan recall|
-| Relevance |5 |Topik penting dalam bidang pertanian dan AI |
-| Testability |4 | Model dapat diuji, tetapi hasil bisa dipengaruhi keterbatasan dataset|
-| Impact |5 |Berpotensi membantu identifikasi penyakit tanaman lebih cepat dan efisien |
+| **Kriteria**      | **Skor (1–5)** | **Justifikasi**                                                                                                                                                    |
+| ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Clarity**       | **5**          | Permasalahan telah dijelaskan secara spesifik, yaitu keterbatasan jumlah kelas penyakit dan belum adanya interpretasi hasil klasifikasi.                           |
+| **Measurability** | **5**          | Keberhasilan penelitian dapat diukur menggunakan Accuracy, Precision, Recall, F1-score, Confusion Matrix, serta visualisasi Grad-CAM.                              |
+| **Relevance**     | **5**          | Penelitian relevan dengan bidang Artificial Intelligence, Computer Vision, dan pertanian karena mendukung identifikasi penyakit daun tomat.                        |
+| **Testability**   | **5**          | Hipotesis dapat diuji melalui implementasi CNN, pengujian pada dataset PlantVillage, dan evaluasi menggunakan metrik klasifikasi serta hasil visualisasi Grad-CAM. |
+| **Impact**        | **5**          | Penelitian memberikan kontribusi dengan memperluas cakupan klasifikasi penyakit dan meningkatkan interpretabilitas model melalui Explainable AI.                   |
 
-**Skor total:** 23 / 25
+
+**Skor total:** 25 / 25
 
 **Problem statement versi final (1 paragraf):**
-> Identifikasi penyakit daun tomat secara manual masih sulit dilakukan karena beberapa penyakit memiliki gejala yang mirip sehingga sering menyebabkan kesalahan diagnosis. Penelitian ini bertujuan mengembangkan metode Convolutional Neural Network (CNN) untuk mendeteksi penyakit daun tomat berdasarkan citra digital dengan tingkat akurasi yang tinggi agar proses identifikasi penyakit menjadi lebih cepat, tepat, dan membantu petani dalam menjaga kualitas hasil panen.
+> Penelitian sebelumnya telah menerapkan Convolutional Neural Network (CNN) untuk mengklasifikasikan penyakit daun tomat dengan hasil yang baik, namun masih memiliki keterbatasan karena hanya mampu mengenali empat jenis penyakit dan belum menyediakan penjelasan mengenai proses pengambilan keputusan model. Keterbatasan tersebut menyebabkan cakupan klasifikasi penyakit belum optimal dan hasil prediksi masih bersifat black box, sehingga sulit dipahami serta diverifikasi oleh pengguna. Oleh karena itu, penelitian ini bertujuan mengembangkan model CNN yang mampu mengklasifikasikan lebih banyak jenis penyakit daun tomat dengan memanfaatkan dataset multikelas serta menerapkan Explainable Artificial Intelligence berbasis Grad-CAM untuk memvisualisasikan area citra yang menjadi dasar prediksi model. Pendekatan ini diharapkan dapat meningkatkan kemampuan klasifikasi sekaligus menghasilkan model yang lebih transparan dan mudah diinterpretasikan.
 
 ---
 
@@ -158,6 +161,4 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 > Bandingkan "masalah" yang biasa ditemui saat coding (bug, error) dengan masalah riset. Apa perbedaan fundamental dalam cara mendefinisikan dan mendekati keduanya?
 
 **Jawaban:**
-> Masalah dalam coding seperti bug atau error biasanya lebih mudah dikenali karena terlihat langsung dari program yang tidak berjalan sesuai harapan. Penyebabnya cenderung jelas dan solusi dapat dicari dengan memperbaiki bagian kode, logika program, atau konfigurasi yang bermasalah. Fokus utamanya adalah membuat sistem kembali berjalan dengan benar.
-
-Sedangkan masalah riset memiliki sifat yang lebih kompleks karena penyebab utamanya belum tentu diketahui dan belum memiliki solusi pasti. Dalam riset, masalah harus dipahami terlebih dahulu melalui pengamatan, pengumpulan data, dan analisis sebelum menentukan solusi yang tepat. Oleh karena itu, coding lebih berfokus pada memperbaiki kesalahan yang sudah diketahui, sedangkan riset berfokus pada menemukan pemahaman dan solusi baru berdasarkan proses ilmiah.
+> Masalah saat coding biasanya berupa bug atau error yang membuat program tidak berjalan dengan benar. Penyelesaiannya dilakukan dengan mencari penyebab error lalu memperbaiki kode. Sementara itu, masalah riset adalah pertanyaan atau permasalahan yang belum memiliki solusi pasti. Penyelesaiannya dilakukan melalui studi literatur, eksperimen, dan analisis untuk menghasilkan pengetahuan atau metode baru. Jadi, masalah coding berfokus pada memperbaiki program, sedangkan masalah riset berfokus pada mencari dan mengembangkan solusi baru.
