@@ -68,15 +68,16 @@ Ancaman validitas harus diidentifikasi **sebelum** eksperimen dan mitigasinya di
 ```
 EXPERIMENT DESIGN
 
-Research Question : Apakah penggunaan CNN Custom dapat meningkatkan akurasi deteksi penyakit daun tomat dibandingkan LeNet-5?
-Hypothesis        : H₁ : CNN Custom memberikan peningkatan akurasi yang signifikan dibanding LeNet-5.
+Research Question : Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat menggunakan dataset Tomato Diseases serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model?
+Hypothesis        : H₁ : Model CNN yang dikembangkan mampu mengklasifikasikan lebih banyak jenis penyakit daun tomat dengan performa yang baik serta memberikan interpretasi visual hasil prediksi menggunakan Grad-CAM.
 Tipe Eksperimen   : [v] Comparison  [ ] Ablation  [ ] Parameter
 
 Kondisi Eksperimen:
-| Kondisi   | Deskripsi                         | IV Value   | CV Settings                                           |
-| --------- | --------------------------------- | ---------- | ----------------------------------------------------- |
-| Control   | Menggunakan model LeNet-5 standar | LeNet-5    | Dataset, preprocessing, dan parameter lingkungan sama |
-| Treatment | Menggunakan model CNN Custom      | CNN Custom | Dataset, preprocessing, dan parameter lingkungan sama |
+| Kondisi       | Deskripsi                                                                                                                | IV Value                        | CV Settings                                                            |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------- | ---------------------------------------------------------------------- |
+| **Control**   | Penelitian baseline (Saputra et al., 2023) menggunakan CNN untuk klasifikasi 4 kelas penyakit daun tomat tanpa Grad-CAM. | CNN (4 kelas, tanpa Grad-CAM)   | Metrik evaluasi dan prosedur klasifikasi dibuat setara.                |
+| **Treatment** | Model usulan menggunakan CNN untuk klasifikasi 10 kelas penyakit daun tomat dengan Grad-CAM.                             | CNN (10 kelas, dengan Grad-CAM) | Dataset Tomato Diseases, preprocessing, dan metrik evaluasi yang sama. |
+
 
 
 Fairness Checklist:
@@ -86,19 +87,20 @@ Fairness Checklist:
   [v] Environment identik
   [v] Metrik evaluasi sama
 
-| Threat Type | Ancaman Spesifik                             | Mitigasi                                              |
-| ----------- | -------------------------------------------- | ----------------------------------------------------- |
-| Internal    | Overfitting pada dataset terbatas            | Menggunakan validasi dan data uji terpisah            |
-| External    | Model belum tentu bekerja pada kondisi nyata | Menambah variasi dataset dari lingkungan berbeda      |
-| Construct   | Accuracy saja belum cukup mewakili performa  | Menambahkan precision, recall, dan F1-score           |
-| Conclusion  | Perbedaan hasil bisa dipengaruhi parameter   | Menggunakan parameter yang konsisten pada semua model |
+| Threat Type    | Ancaman Spesifik                                                         | Mitigasi                                                                                                |
+| -------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| **Internal**   | Parameter pelatihan dapat memengaruhi hasil klasifikasi.                 | Menggunakan parameter pelatihan yang konsisten pada seluruh eksperimen.                                 |
+| **External**   | Hasil mungkin berbeda jika menggunakan dataset lain atau citra lapangan. | Menjelaskan bahwa penelitian menggunakan dataset Tomato Diseases sebagai ruang lingkup penelitian.      |
+| **Construct**  | Metrik evaluasi belum sepenuhnya menggambarkan interpretabilitas model.  | Menggunakan Accuracy, Precision, Recall, F1-score, Confusion Matrix, serta visualisasi Grad-CAM.        |
+| **Conclusion** | Kesimpulan dapat dipengaruhi oleh jumlah data atau distribusi kelas.     | Menggunakan pembagian data latih dan data uji secara konsisten serta melaporkan seluruh hasil evaluasi. |
+
 
 
 Statistical Plan:
-  Uji statistik   : Paired t-test
-  Justifikasi      : Untuk membandingkan performa dua model pada dataset yang sama
+  Uji statistik   : Analisis deskriptif menggunakan Accuracy, Precision, Recall, F1-score, dan Confusion Matrix.
+  Justifikasi      : UTujuan penelitian adalah mengevaluasi performa model CNN dan interpretasi hasil menggunakan Grad-CAM, sehingga analisis deskriptif sudah memadai untuk membandingkan hasil dengan penelitian baseline.
   Alpha            : 0,05
-  Effect size min  : 0,2
+  Effect size min  : Tidak ditetapkan, karena penelitian ini berfokus pada evaluasi performa model, bukan pengujian signifikansi statistik.
 ```
 
 ---
@@ -107,13 +109,14 @@ Statistical Plan:
 
 Susun desain eksperimen berdasarkan RQ, variabel, dan sistem dari WS-04 sampai WS-06.
 
-**RQ:** Apakah penggunaan CNN Custom dapat meningkatkan akurasi deteksi penyakit daun tomat dibandingkan LeNet-5?
+**RQ:** Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat menggunakan dataset Tomato Diseases serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model?
 **Tipe eksperimen:** [v] Comparison / [ ] Ablation / [ ] Parameter
 
-| Kondisi   | Deskripsi                                  | IV Value   | CV Settings                                                    |
-| --------- | ------------------------------------------ | ---------- | -------------------------------------------------------------- |
-| Control   | Model baseline menggunakan LeNet-5 standar | LeNet-5    | Dataset citra daun tomat, preprocessing sama, split data 80:20 |
-| Treatment | Model menggunakan CNN Custom               | CNN Custom | Dataset citra daun tomat, preprocessing sama, split data 80:20 |
+| Kondisi       | Deskripsi                                                                                                     | IV Value                        | CV Settings                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Control**   | Penelitian baseline (Saputra et al., 2023) menggunakan CNN untuk klasifikasi 4 kelas penyakit tanpa Grad-CAM. | CNN (4 kelas, tanpa Grad-CAM)   | Dataset Tomato Diseases, preprocessing yang sama, ukuran citra 224×224, metrik evaluasi sama. |
+| **Treatment** | Model usulan menggunakan CNN untuk klasifikasi 10 kelas penyakit dengan Grad-CAM.                             | CNN (10 kelas, dengan Grad-CAM) | Dataset Tomato Diseases, preprocessing yang sama, ukuran citra 224×224, metrik evaluasi sama. |
+
 
 
 ---
@@ -122,13 +125,14 @@ Susun desain eksperimen berdasarkan RQ, variabel, dan sistem dari WS-04 sampai W
 
 Evaluasi apakah desain eksperimen di Latihan 1 sudah fair.
 
-| Kriteria             | Status | Detail                                                          |
-| -------------------- | ------ | --------------------------------------------------------------- |
-| Dataset identik      | ✅      | Sama-sama menggunakan dataset citra daun tomat yang sama        |
-| Preprocessing setara | ✅      | Kedua model menggunakan preprocessing citra yang sama           |
-| Tuning effort setara | ✅      | Parameter training disesuaikan secara seimbang pada kedua model |
-| Environment identik  | ✅      | Pengujian dilakukan pada perangkat dan lingkungan yang sama     |
-| Metrik evaluasi sama | ✅      | Menggunakan accuracy, precision, recall, dan confusion matrix   |
+| Kriteria             | Status | Detail                                                                            |
+| -------------------- | ------ | --------------------------------------------------------------------------------- |
+| Dataset identik      | ✅      | Kedua kondisi menggunakan dataset Tomato Diseases.                                |
+| Preprocessing setara | ✅      | Seluruh citra diproses dengan langkah preprocessing yang sama.                    |
+| Tuning effort setara | ✅      | Parameter pelatihan ditetapkan secara konsisten pada kedua kondisi.               |
+| Environment identik  | ✅      | Eksperimen dijalankan pada perangkat dan lingkungan perangkat lunak yang sama.    |
+| Metrik evaluasi sama | ✅      | Evaluasi menggunakan Accuracy, Precision, Recall, F1-score, dan Confusion Matrix. |
+
 
 
 **Ada yang tidak fair?** [ ] Ya / [v] Tidak
@@ -140,17 +144,18 @@ Evaluasi apakah desain eksperimen di Latihan 1 sudah fair.
 
 Identifikasi ancaman validitas untuk desain eksperimen ini.
 
-| Threat Type | Ancaman Spesifik                                                | Mitigasi                                                                   |
-| ----------- | --------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Internal    | Overfitting pada dataset training                               | Menggunakan data uji terpisah dan validasi model                           |
-| External    | Model mungkin tidak bekerja baik pada kondisi nyata di lapangan | Menambah variasi dataset dari berbagai kondisi pencahayaan dan lingkungan  |
-| Construct   | Accuracy saja belum cukup menggambarkan performa model          | Menambahkan precision, recall, dan F1-score                                |
-| Conclusion  | Hasil eksperimen bisa dipengaruhi pemilihan parameter tertentu  | Menggunakan parameter yang konsisten dan dokumentasi eksperimen yang jelas |
+| **Threat Type** | **Ancaman Spesifik**                                                                                                               | **Mitigasi**                                                                                                  |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Internal**    | Pembagian data latih dan data uji yang tidak tepat dapat menyebabkan hasil evaluasi menjadi bias.                                  | Menggunakan pembagian data train dan test yang konsisten serta memastikan tidak ada data yang tumpang tindih. |
+| **External**    | Model mungkin memiliki performa berbeda jika diuji menggunakan citra daun tomat dari kondisi lapangan yang berbeda dengan dataset. | Menjelaskan bahwa penelitian hanya menggunakan dataset Tomato Diseases sebagai ruang lingkup penelitian.      |
+| **Construct**   | Metrik evaluasi belum sepenuhnya menggambarkan interpretabilitas model.                                                            | Menggunakan Accuracy, Precision, Recall, F1-score, Confusion Matrix, serta visualisasi Grad-CAM.              |
+| **Conclusion**  | Kesimpulan dapat dipengaruhi oleh jumlah data atau distribusi kelas yang tidak seimbang.                                           | Melaporkan seluruh hasil evaluasi dan menggunakan pembagian data yang proporsional pada setiap kelas.         |
 
 
-**Ancaman mana yang paling sulit dimitigasi?** External validity
+
+**Ancaman mana yang paling sulit dimitigasi?** External Threat
 **Mengapa?**
-> Karena kondisi nyata di lapangan sangat beragam, sedangkan dataset penelitian biasanya masih terbatas dan tidak selalu mewakili semua kondisi tanaman tomat sebenarnya.
+> Karena penelitian menggunakan dataset publik sehingga belum dapat menjamin bahwa model akan memiliki performa yang sama pada citra daun tomat yang diambil langsung di lapangan dengan kondisi pencahayaan, sudut pengambilan gambar, atau kualitas kamera yang berbeda.
 
 ---
 
@@ -159,7 +164,7 @@ Identifikasi ancaman validitas untuk desain eksperimen ini.
 > Sebuah paper melaporkan "metode kami mengalahkan semua baseline." Apa 3 pertanyaan pertama yang harus diajukan untuk mengevaluasi klaim ini?
 
 **Jawaban:**
-1. Apakah semua baseline diuji dengan dataset, preprocessing, dan kondisi eksperimen yang sama?
-2. Apakah baseline yang digunakan benar-benar relevan dan representatif, bukan metode lama yang sengaja dipilih agar mudah dikalahkan?
-3. Apakah peningkatan hasilnya signifikan secara statistik dan dievaluasi dengan metrik yang jelas?
+1. Apakah semua metode dibandingkan menggunakan dataset dan metrik evaluasi yang sama?
+2. Apakah eksperimen dilakukan dengan kondisi yang adil, seperti preprocessing, parameter pelatihan, dan lingkungan pengujian yang sama?
+3. Apakah peningkatan hasil didukung oleh analisis atau bukti yang jelas sehingga klaim dapat dipercaya dan direproduksi?
 
