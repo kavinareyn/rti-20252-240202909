@@ -73,32 +73,32 @@ Jika ada lompatan (section B tidak menjawab pertanyaan section A), red thread pu
 PROPOSAL INTEGRATION CHECKLIST
 
 Koneksi Vertikal (Flow Atas-Bawah):
-  [ ] Problem → Gap: masalah terdokumentasi di literatur
-  [ ] Gap → RQ: pertanyaan menjawab gap spesifik
-  [ ] RQ → Hypothesis: hipotesis memprediksi jawaban
-  [ ] Hypothesis → Metric: metrik mengukur variabel dalam hipotesis
-  [ ] Metric → System: komponen sistem menghasilkan/mengukur metrik
-  [ ] System → Experiment: desain eksperimen menggunakan sistem
+  [v] Problem → Gap: masalah terdokumentasi di literatur
+  [v] Gap → RQ: RQ dirumuskan untuk menjawab Data Gap dan Method Gap.
+  [v] RQ → Hypothesis: hipotesis memprediksi hasil penerapan CNN dan Grad-CAM.
+  [v] Hypothesis → Metric: hipotesis diuji menggunakan Accuracy, Precision, Recall, F1-score, dan Confusion Matrix.
+  [v] Metric → System: sistem menghasilkan prediksi yang dapat diukur dengan metrik evaluasi dan divisualisasikan menggunakan Grad-CAM.
+  [v] System → Experiment: desain eksperimen menggunakan sistem CNN dengan dataset Tomato Diseases.
 
 Koneksi Horizontal (Konsistensi):
-  [ ] Istilah sama di semua bagian
-  [ ] Variabel di RQ = variabel di hipotesis = metrik di desain
-  [ ] Scope tidak berubah dari masalah ke eksperimen
+  [v] Istilah sama di semua bagian
+  [v] Variabel di RQ = variabel di hipotesis = metrik di desain
+  [v] Scope tidak berubah dari masalah ke eksperimen
 
 Cognitive Trap Checklist:
-  [ ] Tidak ada paragraf "promosi" di pendahuluan (hanya data & gap)
-  [ ] Metodologi disesuaikan ke RQ, bukan copy-paste textbook
-  [ ] Timeline sudah ditambah buffer 30-50% dari estimasi awal
-  [ ] Proposal mengakui kemungkinan H0 tidak ditolak (honest uncertainty)
-  [ ] Tidak ada klaim "pasti berhasil" atau "meningkatkan signifikan"
+  [v] Tidak ada paragraf "promosi" di pendahuluan (hanya data & gap)
+  [v] Metodologi disesuaikan ke RQ, bukan copy-paste textbook
+  [v] Timeline sudah ditambah buffer 30-50% dari estimasi awal
+  [v] Proposal mengakui kemungkinan H0 tidak ditolak (honest uncertainty)
+  [v] Tidak ada klaim "pasti berhasil" atau "meningkatkan signifikan"
 
 Rubrik Self-Assessment:
 | Kriteria     | 1 (Lemah)                                        | 2 (Cukup)                                     | 3 (Baik)                                           | Skor |
 |------------- |--------------------------------------------------|-----------------------------------------------|----------------------------------------------------|------|
-| Koherensi    | >2 koneksi vertikal terputus                     | 1-2 koneksi lemah, argumen masih bisa diikuti | Semua 6 koneksi terhubung, red thread jelas        |      |
-| Specificity  | Variabel/metrik masih abstrak, tidak ada angka   | Sebagian metrik terdefinisi numerik           | Semua metrik + threshold + unit pengukuran jelas   |      |
-| Feasibility  | Timeline >6 bulan tanpa memperhitungkan sumber   | Timeline 3-6 bulan dengan asumsi tertentu     | Timeline 1-3 bulan realistis dengan rencana detail |      |
-| Rigor        | Baseline tidak jelas atau straw man              | 1-2 baseline dengan justifikasi partial       | 2+ baseline SOTA + justifikasi pemilihan lengkap   |      |
+| Koherensi    | >2 koneksi vertikal terputus                     | 1-2 koneksi lemah, argumen masih bisa diikuti | Semua 6 koneksi terhubung, red thread jelas        |    3  |
+| Specificity  | Variabel/metrik masih abstrak, tidak ada angka   | Sebagian metrik terdefinisi numerik           | Semua metrik + threshold + unit pengukuran jelas   |   3   |
+| Feasibility  | Timeline >6 bulan tanpa memperhitungkan sumber   | Timeline 3-6 bulan dengan asumsi tertentu     | Timeline 1-3 bulan realistis dengan rencana detail |   3   |
+| Rigor        | Baseline tidak jelas atau straw man              | 1-2 baseline dengan justifikasi partial       | 2+ baseline SOTA + justifikasi pemilihan lengkap   |    2  |
 ```
 
 ---
@@ -107,15 +107,16 @@ Rubrik Self-Assessment:
 
 Kumpulkan hasil dari WS-02 sampai WS-07 menjadi satu ringkasan proposal.
 
-| Komponen | Sumber | Isi (1-2 kalimat) |
-|----------|--------|-------------------|
-| Problem Statement | WS-02 | *Contoh: Sistem rekomendasi memiliki akurasi tinggi (RMSE 0.87) tetapi satisfaction score rendah (45/100). Gap antara metrik teknis dan kepuasan pengguna belum diteliti.* |
-| Gap | WS-03 | *Contoh: Tidak ada studi yang mengintegrasikan collaborative filtering dengan user-context signals untuk meningkatkan satisfaction.* |
-| RQ | WS-04 | *Contoh: Apakah penambahan context-aware signals pada collaborative filtering meningkatkan satisfaction score tanpa menurunkan RMSE?* |
-| Hipotesis | WS-04 | *Contoh: H₁: Sistem CF+context menghasilkan satisfaction ≥ 70/100 dengan RMSE ≤ 0.90 dibanding baseline CF murni.* |
-| Variabel & Metrik | WS-05 | *Contoh: IV = jenis sistem (CF vs CF+context); DV = satisfaction score (skala 0-100) + RMSE (regresi).* |
-| Sistem | WS-06 | |
-| Desain Eksperimen | WS-07 | |
+| **Komponen**          | **Sumber** | **Isi (1–2 kalimat)**                                                                                                                                                                                                                          |
+| --------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Problem Statement** | WS-02      | Klasifikasi penyakit daun tomat menggunakan CNN telah menunjukkan performa yang baik, namun penelitian sebelumnya masih terbatas pada jumlah kelas penyakit dan belum memberikan penjelasan mengenai dasar pengambilan keputusan model.        |
+| **Gap**               | WS-03      | Penelitian sebelumnya umumnya hanya menggunakan empat kelas penyakit dan belum mengintegrasikan Explainable AI melalui Grad-CAM untuk memvisualisasikan area yang menjadi dasar prediksi model.                                                |
+| **RQ**                | WS-04      | Bagaimana performa model Convolutional Neural Network (CNN) dalam mengklasifikasikan berbagai jenis penyakit daun tomat menggunakan dataset Tomato Diseases serta bagaimana Grad-CAM memvisualisasikan area yang menjadi dasar prediksi model? |
+| **Hipotesis**         | WS-04      | **H₁:** Model CNN mampu mengklasifikasikan berbagai jenis penyakit daun tomat dengan performa yang baik serta Grad-CAM dapat memvisualisasikan area yang menjadi dasar prediksi model.                                                         |
+| **Variabel & Metrik** | WS-05      | **IV:** Model CNN. **DV:** Performa klasifikasi yang diukur menggunakan Accuracy, Precision, Recall, F1-score, dan Confusion Matrix. **CV:** Dataset Tomato Diseases.                                                                          |
+| **Sistem**            | WS-06      | Sistem terdiri atas preprocessing citra, klasifikasi menggunakan CNN, evaluasi performa model, serta visualisasi hasil prediksi menggunakan Grad-CAM.                                                                                          |
+| **Desain Eksperimen** | WS-07      | Penelitian menggunakan eksperimen comparison terhadap penelitian baseline dengan kondisi evaluasi yang setara menggunakan dataset Tomato Diseases, preprocessing yang sama, dan metrik evaluasi yang konsisten.                                |
+
 
 ---
 
@@ -123,20 +124,21 @@ Kumpulkan hasil dari WS-02 sampai WS-07 menjadi satu ringkasan proposal.
 
 Verifikasi 6 koneksi kritis. Isi dengan merujuk tabel di Latihan 1.
 
-| Koneksi | Status | Bukti |
-|---------|--------|-------|
-| Problem → Gap | *Contoh: ✅ — gap muncul dari 15 paper Bab 3 yang tidak ada yang mengkombinasikan CF + context untuk satisfaction* | |
-| Gap → RQ | *Contoh: ✅ — RQ langsung menanyakan apakah CF+context meningkatkan satisfaction* | |
-| RQ → Hypothesis | *Contoh: ✅ — H₁ memprediksi satisfaction ≥ 70 dengan threshold RMSE ≤ 0.90* | |
-| Hypothesis → Metric | | |
-| Metric → System | | |
-| System → Experiment | | |
+| Koneksi                 | Status | Bukti                                                                                                                                                                            |
+| ----------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Problem → Gap**       | ✅      | Masalah pada penelitian sebelumnya menunjukkan cakupan penyakit masih terbatas dan belum menerapkan Explainable AI, sehingga muncul Data Gap dan Method Gap.                     |
+| **Gap → RQ**            | ✅      | RQ secara langsung menanyakan performa CNN pada berbagai jenis penyakit daun tomat serta visualisasi prediksi menggunakan Grad-CAM untuk menjawab kedua gap tersebut.            |
+| **RQ → Hypothesis**     | ✅      | Hipotesis memprediksi bahwa CNN mampu mengklasifikasikan berbagai jenis penyakit daun tomat dengan baik serta Grad-CAM dapat memvisualisasikan area yang menjadi dasar prediksi. |
+| **Hypothesis → Metric** | ✅      | Hipotesis diuji menggunakan Accuracy, Precision, Recall, F1-score, Confusion Matrix, serta visualisasi Grad-CAM.                                                                 |
+| **Metric → System**     | ✅      | Sistem menghasilkan prediksi yang dievaluasi menggunakan metrik klasifikasi dan divisualisasikan menggunakan Grad-CAM.                                                           |
+| **System → Experiment** | ✅      | Desain eksperimen menggunakan sistem CNN dengan dataset Tomato Diseases dan parameter yang konsisten selama proses pelatihan dan pengujian.                                      |
 
-**Koneksi mana yang paling lemah?** _______________________
+
+**Koneksi mana yang paling lemah?** Hypothesis -> Metric
 **Bagaimana cara memperkuatnya?**
-> ___________________________________________________
+> Menambahkan target performa yang lebih spesifik (misalnya target Accuracy atau F1-score) jika hasil eksperimen sudah diperoleh, sehingga hubungan antara hipotesis dan metrik menjadi lebih terukur.
 
-**Konsistensi horizontal — apakah istilah dan scope konsisten?** [ ] Ya / [ ] Tidak
+**Konsistensi horizontal — apakah istilah dan scope konsisten?** [v] Ya / [ ] Tidak
 > Jika tidak, di bagian mana terjadi inkonsistensi? _________
 
 ---
@@ -145,16 +147,17 @@ Verifikasi 6 koneksi kritis. Isi dengan merujuk tabel di Latihan 1.
 
 Evaluasi proposal mini menggunakan rubrik.
 
-| Kriteria | Skor (1-3) | Justifikasi |
-|----------|-----------|-------------|
-| Koherensi | *Contoh: 2 — koneksi gap→RQ masih lemah karena gap belum cukup narrow* | |
-| Specificity | *Contoh: 3 — metrik (satisfaction 0-100, RMSE) sudah terdefinisi numerik* | |
-| Feasibility | | |
-| Rigor | | |
+| Kriteria        | Skor (1–3) | Justifikasi                                                                                                                                                                    |
+| --------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Koherensi**   | **3**      | Alur penelitian konsisten mulai dari problem, research gap, RQ, hipotesis, variabel, sistem, hingga desain eksperimen.                                                         |
+| **Specificity** | **3**      | Variabel penelitian, dataset, metode CNN, metrik evaluasi (Accuracy, Precision, Recall, F1-score, Confusion Matrix), dan penggunaan Grad-CAM telah didefinisikan dengan jelas. |
+| **Feasibility** | **3**      | Penelitian realistis untuk dilaksanakan menggunakan dataset publik dari Kaggle dan perangkat yang tersedia, dengan ruang lingkup yang sesuai.                                  |
+| **Rigor**       | **2**      | Proposal menggunakan baseline yang relevan, namun belum melibatkan lebih dari satu baseline atau metode state-of-the-art sehingga masih dapat diperkuat.                       |
 
-**Skor total:** _____ / 12
 
-**Apakah proposal siap untuk fase eksekusi?** [ ] Ya / [ ] Belum
+**Skor total:** 11 / 12
+
+**Apakah proposal siap untuk fase eksekusi?** [v] Ya / [ ] Belum
 > Jika belum, apa yang perlu diperbaiki? __________________
 
 ---
@@ -163,8 +166,8 @@ Evaluasi proposal mini menggunakan rubrik.
 
 > Dari seluruh proses WS-01 sampai WS-08, bagian mana yang paling mudah dan paling sulit? Mengapa? Apa yang akan dilakukan berbeda jika mengulang dari awal?
 
-**Bagian termudah:** ____________________________________
-**Bagian tersulit:** ____________________________________
+**Bagian termudah:** Merumuskan Research Question (RQ) berdasarkan research gap yang telah diidentifikasi.
+**Bagian tersulit:** Mengidentifikasi research gap yang valid dan menyusun desain eksperimen agar konsisten dengan RQ, variabel, serta metode penelitian
 **Yang akan dilakukan berbeda:**
-> ___________________________________________________
-> ___________________________________________________
+> Melakukan studi literatur dan menentukan dataset sejak awal agar penyusunan research gap, RQ, dan metodologi menjadi lebih konsisten serta mengurangi revisi pada tahap selanjutnya.
+

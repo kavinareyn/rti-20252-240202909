@@ -96,7 +96,7 @@ Gunakan RQ dari WS-04. Definisikan variabel dan metriknya.
 | -------------------- | ---- | ------------------------------------------------------ | ------------------------------------------------------- | ------------ | ------ |
 | Model CNN            | IV   | Metode klasifikasi penyakit daun tomat                 | Implementasi CNN (MobileNetV2)                          | Nominal      | —      |
 | Performa klasifikasi | DV   | Kemampuan model mengklasifikasikan penyakit daun tomat | Accuracy, Precision, Recall, F1-score, Confusion Matrix | Rasio        | %      |
-| Dataset Tomato Deseases | CV   | Dataset yang digunakan selama eksperimen               | Dataset Tomato Deseases  (10 kelas penyakit daun tomat)     | Nominal      | —      |
+| Dataset Tomato Diseases | CV   | Dataset yang digunakan selama eksperimen               | Dataset Tomato Diseases  (10 kelas penyakit daun tomat)     | Nominal      | —      |
 
 
 
@@ -129,10 +129,10 @@ Bayangkan data yang akan dikumpulkan dari eksperimen. Evaluasi 4 dimensi kualita
 
 | **Dimensi**            | **Pertanyaan**                             | **Jawaban**                                                                                                             | **Strategi Mitigasi**                                                                                                 |
 | ---------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| **Completeness**       | Apakah semua data point terkumpul?         | Ya, seluruh citra daun tomat yang digunakan berasal dari dataset PlantVillage yang telah memiliki label kelas penyakit. | Memastikan seluruh data berhasil dimuat dan tidak ada file yang rusak atau hilang sebelum proses pelatihan.           |
+| **Completeness**       | Apakah semua data point terkumpul?         | Ya, seluruh citra daun tomat yang digunakan berasal dari dataset Tomato Diseases  yang telah memiliki label kelas penyakit. | Memastikan seluruh data berhasil dimuat dan tidak ada file yang rusak atau hilang sebelum proses pelatihan.           |
 | **Consistency**        | Apakah ada kontradiksi internal?           | Tidak, seluruh data menggunakan format citra dan label yang konsisten.                                                  | Melakukan preprocessing yang sama pada seluruh citra dan menggunakan pembagian dataset yang konsisten.                |
 | **Validity**           | Apakah benar-benar mengukur yang dimaksud? | Ya, metrik Accuracy, Precision, Recall, dan F1-score digunakan untuk mengukur performa klasifikasi model CNN.           | Menggunakan metrik evaluasi standar dan dataset yang telah diberi label dengan benar.                                 |
-| **Representativeness** | Apakah sampel mewakili populasi target?    | Ya, dataset PlantVillage mencakup beberapa jenis penyakit daun tomat sehingga cukup mewakili objek penelitian.          | Menggunakan seluruh kelas penyakit yang tersedia pada dataset dan membagi data menjadi data latih, validasi, dan uji. |
+| **Representativeness** | Apakah sampel mewakili populasi target?    | Ya, dataset Diseases mencakup beberapa jenis penyakit daun tomat sehingga cukup mewakili objek penelitian.          | Menggunakan seluruh kelas penyakit yang tersedia pada dataset dan membagi data menjadi data latih, validasi, dan uji. |
 
 
 ---
