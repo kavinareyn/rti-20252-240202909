@@ -81,17 +81,20 @@ Hardware:
 Software:
   OS        : Windows 11 Home Single Language 23H2 (64-bit)
   Runtime   : Python 3.11
-  Framework : TensorFlow 2.x
+  Framework : TensorFlow 2.21.0
 
 Dependencies:
-| Library       | Version | Sumber | Hash/Checksum |
-| ------------- | ------- | ------ | ------------- |
-| TensorFlow    | 2.16.x  | PyPI   | —             |
-| NumPy         | 1.26.x  | PyPI   | —             |
-| OpenCV-Python | 4.10.x  | PyPI   | —             |
-| scikit-learn  | 1.5.x   | PyPI   | —             |
-| Matplotlib    | 3.9.x   | PyPI   | —             |
-| Pillow        | 10.x    | PyPI   | —             |
+| Library       | Version  | Sumber | Hash/Checksum |
+| ------------- | -------- | ------ | ------------- |
+| TensorFlow    | 2.21.0   | PyPI   | -             |
+| Keras         | 3.15.0   | PyPI   | -             |
+| NumPy         | 2.4.6    | PyPI   | -             |
+| OpenCV-Python | 5.0.0.93 | PyPI   | -             |
+| Matplotlib    | 3.11.0   | PyPI   | -             |
+| Pandas        | 3.0.3    | PyPI   | -             |
+| Scikit-learn  | 1.9.0    | PyPI   | -             |
+| Pillow        | 12.3.0   | PyPI   | -             |
+
 
 
 Konfigurasi:
@@ -103,6 +106,8 @@ Konfigurasi:
   - Epoch : 20
   - Learning rate : 0.001
   - Optimizer : Adam
+   - Loss Function : Sparse Categorical Crossentropy
+   -Activation Function : ReLU (hidden layer) dan Softmax (output layer)
 Reproducibility Check:
   [v] Dependency terdokumentasi (requirements.txt)
   [v] Seed ditetapkan di semua level (Python, NumPy, framework)
@@ -129,13 +134,14 @@ Dokumentasikan environment untuk eksperimen Anda (boleh environment saat ini ata
 
 **Dependencies (minimal 5):**
 
-| Library       | Version | Alasan Dibutuhkan                                                        |
-| ------------- | ------- | ------------------------------------------------------------------------ |
-| TensorFlow    | 2.x     | Membangun dan melatih model CNN                                          |
-| NumPy         | 1.x     | Operasi numerik dan pengolahan array                                     |
-| OpenCV-Python | 4.x     | Membaca dan memproses citra daun tomat                                   |
-| scikit-learn  | 1.x     | Evaluasi model (Accuracy, Precision, Recall, F1-score, Confusion Matrix) |
-| Matplotlib    | 3.x     | Visualisasi hasil dan Grad-CAM                                           |
+| Library       | Version  | Alasan Dibutuhkan                                                                                                 |
+| ------------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
+| TensorFlow    | 2.21.0   | Framework utama untuk membangun dan melatih model CNN                                                             |
+| Keras         | 3.15.0   | API untuk membangun arsitektur CNN                                                                                |
+| NumPy         | 2.4.6    | Operasi numerik dan manipulasi array                                                                              |
+| Matplotlib    | 3.11.0   | Visualisasi grafik akurasi dan loss                                                                               |
+| Scikit-learn  | 1.9.0    | Evaluasi model (confusion matrix, precision, recall, F1-score)                                                    |
+| OpenCV-Python | 5.0.0.93 | Pengolahan citra dan implementasi Grad-CAM  |
 
 
 ---
@@ -144,11 +150,12 @@ Dokumentasikan environment untuk eksperimen Anda (boleh environment saat ini ata
 
 Rancang tes repeatability sederhana: jalankan kode yang sama 3× di environment yang sama.
 
-| Run | Seed | Metrik Utama | Hasil Sama? |
-|-----|------|-------------|-------------|
-| 1 | *Contoh: 42* | *Contoh: Accuracy* | — |
-| 2 | | | [ ] Ya / [ ] Tidak |
-| 3 | | | [ ] Ya / [ ] Tidak |
+| Run | Seed | Metrik Utama        | Hasil Sama? |
+| --- | ---- | ------------------- | ----------- |
+| 1   | 42   | Validation Accuracy | —           |
+| 2   | 42   | Validation Accuracy | ☑ Ya*       |
+| 3   | 42   | Validation Accuracy | ☑ Ya*       |
+
 
 **Jika hasil berbeda, kemungkinan penyebab:**
 
@@ -161,8 +168,8 @@ Rancang tes repeatability sederhana: jalankan kode yang sama 3× di environment 
 ___________________________________________________
 
 **Checklist kontrol yang sudah diterapkan:**
-- [ ] Random seed di-set di semua level
-- [ ] Tidak ada background process yang mengganggu
+- [v] Random seed di-set di semua level
+- [v] Tidak ada background process yang mengganggu
 - [ ] Cache dibersihkan antar-run
 - [ ] Config file yang sama untuk semua run
 
@@ -173,33 +180,132 @@ ___________________________________________________
 Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
 
 ```
-# Judul Eksperimen: ____________________
+# Judul Eksperimen:
+Tomato Leaf Disease Classification using Convolutional Neural Network (CNN) and Grad-CAM
 
 ## 1. Environment
-> (Salin spesifikasi dari Latihan 1)
+
+- CPU          : Intel Core i7-12650H
+- RAM          : 8 GB DDR4
+- GPU          : NVIDIA GeForce RTX 2050 Laptop GPU (TensorFlow berjalan menggunakan CPU pada Windows)
+- OS           : Windows 11 64-bit
+- Runtime      : Python 3.11
+- Framework    : TensorFlow 2.21.0
+- Random Seed  : 42
+
+---
 
 ## 2. Installation
-> (Langkah instalasi, misal: "pip install -r requirements.txt")
+
+1. Clone repository.
+2. Buat virtual environment.
+
+```bash
+python -m venv .venv
+```
+
+3. Aktifkan virtual environment.
+
+Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+4. Install dependency.
+
+```bash
+pip install -r requirements.txt
+```
+
+---
 
 ## 3. Data
-> (Deskripsi data: sumber, format, ukuran)
+
+Dataset yang digunakan adalah **Tomato Diseases Dataset** yang diperoleh melalui Kaggle.
+
+Sumber:
+https://www.kaggle.com/datasets/luisolazo/tomato-diseases
+
+Format data berupa citra RGB (.jpg) berukuran **256 × 256 piksel** yang terdiri atas **10 kelas** penyakit daun tomat.
+
+Struktur dataset:
+
+```text
+dataset/
+    train/
+    test/
+```
+
+---
 
 ## 4. Execution
-> (Command untuk menjalankan eksperimen)
+
+Jalankan eksperimen menggunakan:
+
+```bash
+python main.py
+```
+
+Program akan melakukan:
+
+1. Memuat dataset
+2. Melakukan preprocessing
+3. Membangun model CNN
+4. Melatih model
+5. Menyimpan model
+6. Menyimpan history training
+7. Membuat grafik accuracy dan loss
+
+---
 
 ## 5. Configuration
-> (File config yang digunakan + parameter kunci)
+
+Seluruh konfigurasi eksperimen disimpan pada file:
+
+```text
+config.py
+```
+
+Parameter utama:
+
+- Image Size : 224 × 224
+- Batch Size : 32
+- Learning Rate : 0.001
+- Optimizer : Adam
+- Epoch : 20 (pengujian awal menggunakan 3 epoch)
+- Number of Classes : 10
+
+---
 
 ## 6. Expected Output
-> (Contoh output yang diharapkan + format)
+
+Setelah eksperimen selesai, sistem menghasilkan:
+
+```text
+outputs/
+
+├── models/
+│   └── tomato_cnn.keras
+│
+├── history/
+│   └── history.pkl
+│
+└── figures/
+    ├── accuracy.png
+    └── loss.png
 ```
+
+Output tersebut digunakan sebagai hasil pelatihan model dan dokumentasi proses eksperimen.
 
 ---
 
 ## Refleksi
 
 > Apakah eksperimen Anda saat ini bisa direproduksi oleh orang lain tanpa bantuan Anda? Komponen apa yang masih hilang?
+> Ya, sebagian besar dapat direproduksi, karena struktur proyek, dataset, dependency, konfigurasi eksperimen, serta langkah menjalankan program telah didokumentasikan melalui README.md, requirements.txt, dan config.py.
+> Saat ini pengaturan random seed belum diterapkan pada seluruh komponen (Python, NumPy, dan TensorFlow), sehingga hasil pelatihan masih dapat sedikit berbeda pada setiap proses training. Selain itu, dokumentasi evaluasi model dan implementasi Grad-CAM masih dalam tahap pengembangan.
 
-**Level saat ini:** [ ] Repeatability / [ ] Reproducibility / [ ] Belum keduanya
+**Level saat ini:** [ ] Repeatability / [ ] Reproducibility / [v] Belum keduanya
 **Komponen yang belum terdokumentasi:**
-> ___________________________________________________
+> Dokumentasi pengaturan random seed secara menyeluruh, langkah evaluasi model (Accuracy, Precision, Recall, F1-score, dan Confusion Matrix), serta prosedur dan hasil visualisasi Grad-CAM belum tersedia karena masih dalam tahap pengembangan.
