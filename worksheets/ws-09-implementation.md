@@ -73,32 +73,41 @@ Mengandalkan "install library terbaru" berbahaya: versi berbeda = perilaku berbe
 EXPERIMENT SETUP DOCUMENTATION
 
 Hardware:
-  CPU     : ____________________
-  RAM     : ____________________
-  GPU     : ____________________
-  Storage : ____________________
+  CPU     : Intel® Core™ i7-12650H (12th Gen, 10 Cores / 16 Threads, 2.30 GHz)
+  RAM     : 8 GB DDR4
+  GPU     : NVIDIA GeForce RTX 2050 Laptop GPU (4 GB VRAM)
+  Storage : SSD
 
 Software:
-  OS        : ____________________
-  Runtime   : ____________________
-  Framework : ____________________
+  OS        : Windows 11 Home Single Language 23H2 (64-bit)
+  Runtime   : Python 3.11
+  Framework : TensorFlow 2.x
 
 Dependencies:
-| Library | Version | Sumber | Hash/Checksum |
-|---------|---------|--------|---------------|
-|         |         |        |               |
-|         |         |        |               |
+| Library       | Version | Sumber | Hash/Checksum |
+| ------------- | ------- | ------ | ------------- |
+| TensorFlow    | 2.16.x  | PyPI   | —             |
+| NumPy         | 1.26.x  | PyPI   | —             |
+| OpenCV-Python | 4.10.x  | PyPI   | —             |
+| scikit-learn  | 1.5.x   | PyPI   | —             |
+| Matplotlib    | 3.9.x   | PyPI   | —             |
+| Pillow        | 10.x    | PyPI   | —             |
+
 
 Konfigurasi:
-  Config file     : ____________________
-  Random seed     : ____________________
-  Hyperparameters : ____________________
-
+  Config file     : config.py
+  Random seed     : 42
+  Hyperparameters : 
+  - Image size : 224 × 224
+  - Batch size : 32
+  - Epoch : 20
+  - Learning rate : 0.001
+  - Optimizer : Adam
 Reproducibility Check:
-  [ ] Dependency terdokumentasi (requirements.txt / lock file)
-  [ ] Seed ditetapkan di semua level (Python, NumPy, framework)
-  [ ] Config di version control
-  [ ] README instruksi reproduksi lengkap
+  [v] Dependency terdokumentasi (requirements.txt)
+  [v] Seed ditetapkan di semua level (Python, NumPy, framework)
+  [v] Config di version control
+  [v] README instruksi reproduksi lengkap
 ```
 
 ---
@@ -107,25 +116,27 @@ Reproducibility Check:
 
 Dokumentasikan environment untuk eksperimen Anda (boleh environment saat ini atau yang direncanakan).
 
-| Komponen | Spesifikasi |
-|----------|------------|
-| CPU | *Contoh: Intel Core i7-12700H, 14 Core* |
-| RAM | *Contoh: 32 GB DDR5* |
-| GPU | *Contoh: NVIDIA RTX 3060 6GB / CPU-only jika tidak ada GPU* |
-| OS | *Contoh: Ubuntu 22.04 LTS / Windows 11* |
-| Runtime | |
-| Framework | |
-| Random Seed | |
+| Komponen        | Spesifikasi                                                      |
+| --------------- | ---------------------------------------------------------------- |
+| **CPU**         | Intel® Core™ i7-12650H (12th Gen, 10 Core, 16 Threads, 2.30 GHz) |
+| **RAM**         | 8 GB DDR4                                                        |
+| **GPU**         | NVIDIA GeForce RTX 2050 Laptop GPU 4 GB                          |
+| **OS**          | Windows 11 Home Single Language 23H2 (64-bit)                    |
+| **Runtime**     | Python 3.11                                                      |
+| **Framework**   | TensorFlow                                                       |
+| **Random Seed** | 42                                                               |
+
 
 **Dependencies (minimal 5):**
 
-| Library | Version | Alasan Dibutuhkan |
-|---------|---------|-------------------|
-| *Contoh: scikit-learn* | *1.3.2* | *Klasifikasi + evaluasi metrik* |
-| | | |
-| | | |
-| | | |
-| | | |
+| Library       | Version | Alasan Dibutuhkan                                                        |
+| ------------- | ------- | ------------------------------------------------------------------------ |
+| TensorFlow    | 2.x     | Membangun dan melatih model CNN                                          |
+| NumPy         | 1.x     | Operasi numerik dan pengolahan array                                     |
+| OpenCV-Python | 4.x     | Membaca dan memproses citra daun tomat                                   |
+| scikit-learn  | 1.x     | Evaluasi model (Accuracy, Precision, Recall, F1-score, Confusion Matrix) |
+| Matplotlib    | 3.x     | Visualisasi hasil dan Grad-CAM                                           |
+
 
 ---
 
