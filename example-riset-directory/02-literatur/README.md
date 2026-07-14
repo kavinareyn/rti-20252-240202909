@@ -2,13 +2,13 @@
 
 Folder ini berisi referensi ilmiah yang digunakan sebagai dasar penyusunan penelitian "Klasifikasi Penyakit Daun Tomat Menggunakan Convolutional Neural Network (CNN) dengan Visualisasi Grad-CAM)".
 
-Studi literatur dilakukan untuk memahami penelitian terdahulu mengenai klasifikasi penyakit tanaman menggunakan Deep Learning, mengidentifikasi research gap, serta menentukan metode dan pendekatan yang digunakan dalam penelitian.
+>Studi literatur dilakukan untuk memahami penelitian terdahulu mengenai klasifikasi penyakit tanaman menggunakan Deep Learning, mengidentifikasi research gap, serta menentukan metode dan pendekatan yang digunakan dalam penelitian.
 ---
 Tujuan Studi Literatur
 
 Studi literatur dilakukan untuk:
 
-Memahami perkembangan penelitian mengenai klasifikasi penyakit daun tanaman menggunakan Deep Learning.
+>Memahami perkembangan penelitian mengenai klasifikasi penyakit daun tanaman menggunakan Deep Learning.
 Mengidentifikasi kelebihan dan keterbatasan penelitian terdahulu yang menggunakan metode CNN.
 Menentukan metode yang sesuai untuk mengklasifikasikan penyakit daun tomat.
 Mengidentifikasi penerapan Explainable Artificial Intelligence (XAI), khususnya Grad-CAM, dalam interpretasi hasil klasifikasi.
@@ -18,7 +18,7 @@ Topik Literatur
 
 Referensi yang digunakan pada penelitian ini meliputi beberapa topik berikut.
 
-Artificial Intelligence.
+>Artificial Intelligence.
 Machine Learning.
 Deep Learning.
 Convolutional Neural Network (CNN).
@@ -40,13 +40,13 @@ Penelitian ini menggunakan beberapa jurnal utama sebagai dasar implementasi meto
 | Too et al.                 |  2019 | Perbandingan berbagai arsitektur CNN untuk identifikasi penyakit tanaman.             |
 | Selvaraju et al.           |  2017 | Pengembangan metode Grad-CAM sebagai teknik visualisasi hasil prediksi CNN.           |
 
-Selain jurnal utama tersebut, penelitian juga didukung oleh berbagai referensi mengenai Artificial Intelligence, Deep Learning, Computer Vision, TensorFlow, serta pengolahan citra digital untuk memperkuat landasan teori dan pembahasan penelitian.
+>Selain jurnal utama tersebut, penelitian juga didukung oleh berbagai referensi mengenai Artificial Intelligence, Deep Learning, Computer Vision, TensorFlow, serta pengolahan citra digital untuk memperkuat landasan teori dan pembahasan penelitian.
 ---
 Keterkaitan dengan Penelitian
 
 Hasil studi literatur digunakan sebagai dasar dalam:
 
-Penyusunan proposal penelitian.
+>Penyusunan proposal penelitian.
 Penentuan metode Convolutional Neural Network (CNN).
 Penentuan metode visualisasi Grad-CAM.
 Penyusunan metodologi penelitian.
