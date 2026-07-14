@@ -56,5 +56,5 @@ Penyusunan pembahasan serta penarikan kesimpulan penelitian.
 
 ## Berkas
 
-- example-riset-directory/02-literatur/# 02-literatur.txt — Ringkasan studi literatur dan referensi pendukung penelitian.
+- [# 02-literatur.txt].(# 02-literatur.txt) — Ringkasan studi literatur dan referensi pendukung penelitian.
 - [560062-deteksi-penyakit-tomat-melalui-citra-dau-373d43d2](560062-deteksi-penyakit-tomat-melalui-citra-dau-373d43d2) — jurnal utama
