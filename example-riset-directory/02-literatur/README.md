@@ -56,5 +56,5 @@ Penyusunan pembahasan serta penarikan kesimpulan penelitian.
 
 ## Berkas
 
-- [matriks-literatur.md](matriks-literatur.md) — matriks literatur lengkap (7 topik dipetakan ke 18 referensi terverifikasi; status verifikasi CVE-2026-48524)
-- [daftar-pustaka.bib](daftar-pustaka.bib) — bibliografi BibTeX (18 entri), siap diimpor ke Mendeley
+- [#2-literatur.txt](#2-literatur.txt) — Ringkasan studi literatur dan referensi pendukung penelitian.
+- [560062-deteksi-penyakit-tomat-melalui-citra-dau-373d43d2](560062-deteksi-penyakit-tomat-melalui-citra-dau-373d43d2) — jurnal utama
