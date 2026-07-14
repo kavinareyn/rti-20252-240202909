@@ -1,0 +1,303 @@
+# 02-literatur
+
+Dokumen pada folder ini berisi kumpulan referensi ilmiah yang digunakan sebagai dasar penyusunan proposal, tinjauan pustaka, serta landasan teori penelitian berjudul:
+
+> **Klasifikasi Penyakit Daun Tomat Menggunakan Convolutional Neural Network (CNN) dengan Visualisasi Grad-CAM**
+
+Seluruh referensi diperoleh melalui Google Scholar, IEEE Xplore, ScienceDirect, SpringerLink, Kaggle Documentation, TensorFlow Documentation, dan sumber ilmiah lain yang relevan.
+
+---
+
+## Ringkasan Studi Literatur
+
+Berdasarkan hasil studi literatur, Convolutional Neural Network (CNN) merupakan salah satu metode Deep Learning yang paling banyak digunakan untuk klasifikasi citra karena mampu mempelajari fitur visual secara otomatis melalui proses konvolusi.
+
+Beberapa penelitian terdahulu menunjukkan bahwa CNN mampu memberikan performa yang tinggi pada klasifikasi penyakit tanaman, khususnya penyakit daun tomat. Namun sebagian besar penelitian hanya berfokus pada peningkatan nilai akurasi tanpa memberikan penjelasan mengenai alasan model menghasilkan suatu prediksi.
+
+Oleh karena itu penelitian ini menggunakan CNN sebagai model klasifikasi dan mengintegrasikan **Gradient-weighted Class Activation Mapping (Grad-CAM)** sebagai metode Explainable Artificial Intelligence (XAI) untuk memvisualisasikan area citra yang menjadi perhatian model saat melakukan prediksi.
+
+Dataset yang digunakan adalah **Tomato Diseases Dataset** dari Kaggle yang terdiri dari **10 kelas penyakit** dengan total **17.753 citra data latih** dan **4.440 citra data uji**.
+
+---
+
+## Research Gap
+
+Penelitian terdahulu menunjukkan bahwa CNN mampu menghasilkan performa klasifikasi yang tinggi pada berbagai dataset penyakit tanaman.
+
+Namun sebagian besar penelitian hanya melaporkan metrik evaluasi seperti Accuracy, Precision, Recall, dan F1-Score tanpa memberikan interpretasi visual terhadap proses pengambilan keputusan model.
+
+Selain itu, penelitian terdahulu banyak menggunakan dataset PlantVillage, sedangkan penelitian ini menggunakan **Tomato Diseases Dataset** dari Kaggle yang memiliki distribusi kelas berbeda.
+
+Penelitian ini bertujuan mengevaluasi performa CNN pada dataset tersebut sekaligus menerapkan Grad-CAM agar hasil klasifikasi lebih mudah dipahami.
+
+---
+
+# Topik Literatur
+
+## 1. Artificial Intelligence
+
+Materi yang dipelajari meliputi:
+
+- Konsep Artificial Intelligence
+- Perkembangan AI
+- AI pada bidang pertanian
+
+---
+
+## 2. Machine Learning
+
+Kajian mengenai Machine Learning sebagai dasar pengembangan model klasifikasi.
+
+Topik:
+
+- Machine Learning
+- Supervised Learning
+- Classification
+- Image Classification
+
+---
+
+## 3. Deep Learning
+
+Materi yang dikaji:
+
+- Artificial Neural Network
+- Deep Learning
+- CNN
+- Image Classification
+
+---
+
+## 4. Convolutional Neural Network (CNN)
+
+Kajian utama penelitian.
+
+Topik:
+
+- Convolution Layer
+- Pooling Layer
+- ReLU
+- Fully Connected Layer
+- Softmax
+- Feature Learning
+
+---
+
+## 5. Explainable Artificial Intelligence (XAI)
+
+Kajian mengenai interpretasi model Deep Learning.
+
+Topik:
+
+- Explainable AI
+- Interpretability
+- Model Explanation
+- Heatmap Visualization
+
+---
+
+## 6. Grad-CAM
+
+Kajian mengenai metode visualisasi hasil prediksi CNN.
+
+Topik:
+
+- Gradient-weighted Class Activation Mapping
+- Heatmap
+- Visualisasi Feature Map
+- Model Interpretability
+
+---
+
+## 7. Image Processing dan Computer Vision
+
+Materi yang dipelajari:
+
+- Digital Image Processing
+- Computer Vision
+- Image Classification
+- Pattern Recognition
+
+---
+
+## 8. TensorFlow dan Keras
+
+Framework yang digunakan.
+
+Topik:
+
+- TensorFlow
+- Keras
+- Dataset Pipeline
+- Model Training
+- Model Evaluation
+
+---
+
+## 9. Tomato Leaf Disease
+
+Kajian mengenai penyakit daun tomat.
+
+Kelas penyakit:
+
+- Bacterial Spot
+- Early Blight
+- Healthy
+- Late Blight
+- Leaf Mold
+- Mosaic Virus
+- Septoria Leaf Spot
+- Target Spot
+- Two-Spotted Spider Mite
+- Yellow Leaf Curl Virus
+
+---
+
+## 10. Tomato Diseases Dataset
+
+Kajian mengenai dataset penelitian.
+
+Topik:
+
+- Distribusi Dataset
+- Image Resolution
+- Dataset Splitting
+- Image Preprocessing
+- Resize
+- Normalization
+
+---
+
+## 11. Evaluasi Model
+
+Metrik evaluasi yang digunakan.
+
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- Confusion Matrix
+- Classification Report
+
+---
+
+# Referensi Utama
+
+1. Mohanty, S. P., Hughes, D. P., & Salathé, M. (2016).
+
+Using Deep Learning for Image-Based Plant Disease Detection.
+
+→ Referensi utama mengenai penerapan CNN pada klasifikasi penyakit tanaman.
+
+---
+
+# Referensi Pendukung
+
+### Artificial Intelligence
+
+- Russell, S., & Norvig, P.
+Artificial Intelligence: A Modern Approach.
+
+### Machine Learning
+
+- Mitchell, T. M.
+Machine Learning.
+
+- Géron, A.
+Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow.
+
+### Deep Learning
+
+- Goodfellow, I., Bengio, Y., & Courville.
+Deep Learning.
+
+### CNN
+
+- LeCun, Y., et al.
+Gradient-Based Learning Applied to Document Recognition.
+
+- Krizhevsky, A., et al.
+ImageNet Classification with Deep Convolutional Neural Networks.
+
+- Ferentinos, K.
+Deep Learning Models for Plant Disease Detection and Diagnosis.
+
+- Too, E. C., et al.
+A Comparative Study of Fine-Tuning Deep Learning Models for Plant Disease Identification.
+
+### Explainable AI
+
+- Selvaraju, R. R., et al.
+Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization.
+
+### TensorFlow
+
+- TensorFlow Official Documentation
+
+- Keras API Documentation
+
+### Computer Vision
+
+- Gonzalez, R. C.
+Digital Image Processing.
+
+- Szeliski, R.
+Computer Vision: Algorithms and Applications.
+
+---
+
+# Dokumen yang Disimpan
+
+Folder **02-literatur** berisi:
+
+| No | Dokumen | Status |
+|----|---------|:------:|
+|1|Jurnal utama CNN|✅|
+|2|Jurnal pendukung|✅|
+|3|Ringkasan literatur|✅|
+|4|Matriks literatur|✅|
+|5|Daftar pustaka (.bib)|✅|
+|6|Daftar pustaka (.ris)|✅|
+|7|Sitasi Mendeley|✅|
+
+---
+
+# Struktur Folder
+
+02-literatur/
+
+├── jurnal-utama/
+
+├── jurnal-pendukung/
+
+├── matriks-literatur.md
+
+├── ringkasan-jurnal.md
+
+├── daftar-pustaka.bib
+
+├── daftar-pustaka.ris
+
+└── README.md
+
+---
+
+# Navigasi Repository
+
+| Folder | Keterangan |
+|--------|------------|
+|00-admin|Administrasi Penelitian|
+|01-proposal|Proposal Penelitian|
+|03-teori|Landasan Teori|
+|04-data|Dataset Penelitian|
+|05-kode|Implementasi CNN|
+|06-output|Hasil Pelatihan|
+|07-manuskrip|Artikel Ilmiah|
+|08-laporan|Laporan Akhir|
+|09-docs|Dokumentasi|
+
+---
+
+# Catatan
+
+Seluruh referensi pada folder ini digunakan sebagai dasar penyusunan proposal penelitian, penyusunan landasan teori, identifikasi research gap, serta pembahasan hasil penelitian mengenai **klasifikasi penyakit daun tomat menggunakan Convolutional Neural Network (CNN) dengan visualisasi Grad-CAM**.
