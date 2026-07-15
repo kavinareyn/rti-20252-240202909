@@ -126,15 +126,16 @@ Model CNN menunjukkan performa yang stabil pada empat kali eksperimen dengan rat
 
 Tentukan uji statistik yang tepat untuk eksperimen Anda.
 
-| Pertanyaan | Jawaban |
-|-----------|---------|
-| Berapa grup yang dibandingkan? | *Contoh: 3 (BERT, LSTM, SVM)* |
-| Apakah data berpasangan (paired)? | |
-| Apakah distribusi normal? (uji normalitas) | |
-| **Uji yang dipilih:** | |
-| **Justifikasi:** | |
+| Pertanyaan                                     | Jawaban                                                                                                                                                                                                                                                                                                                                      |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Berapa grup yang dibandingkan?**             | **1 grup (Model CNN)**                                                                                                                                                                                                                                                                                                                       |
+| **Apakah data berpasangan (paired)?**          | **Tidak**                                                                                                                                                                                                                                                                                                                                    |
+| **Apakah distribusi normal? (uji normalitas)** | **Tidak diuji, karena tidak dilakukan analisis inferensial atau perbandingan antargrup.**                                                                                                                                                                                                                                                    |
+| **Uji yang dipilih:**                          | **Tidak dilakukan uji statistik inferensial.**                                                                                                                                                                                                                                                                                               |
+| **Justifikasi:**                               | **Penelitian ini bertujuan mengevaluasi performa satu model CNN dalam mengklasifikasikan penyakit daun tomat. Analisis dilakukan menggunakan statistik deskriptif (mean, standar deviasi) serta metrik evaluasi Accuracy, Precision, Recall, dan F1-Score dari empat kali eksperimen, sehingga tidak diperlukan uji hipotesis inferensial.** |
 
-**Effect size yang akan dilaporkan:** [ ] Cohen's d / [ ] Eta-squared / [ ] Lainnya: ____
+
+**Effect size yang akan dilaporkan:** [ ] Cohen's d / [ ] Eta-squared / [v] Lainnya: Tidak dilaporkan (tidak dilakukan uji inferensial).
 
 ---
 
