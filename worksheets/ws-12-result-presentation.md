@@ -65,25 +65,29 @@ Keduanya **saling melengkapi**:
 ```
 RESULT PRESENTATION PLAN
 
-Research Question : ____________________
-Metrik Utama      : ____________________
+Research Question : Bagaimana performa Convolutional Neural Network (CNN) dalam mengklasifikasikan 10 kelas penyakit daun tomat menggunakan Tomato Leaf Disease Dataset, serta bagaimana Grad-CAM memvisualisasikan area citra yang digunakan model dalam melakukan prediksi?
+Metrik Utama      : Accuracy, Precision, Recall, dan F1-Score
 
 Tabel Hasil:
-| Skenario | Metrik 1 (mean ± std) | Metrik 2 (mean ± std) | n |
-|----------|----------------------|----------------------|---|
-|          |                      |                      |   |
+| Skenario       | Accuracy (mean ± std) | F1-Score (mean ± std) | n |
+| -------------- | --------------------- | --------------------- | - |
+| CNN (20 Epoch) | **91.65% ± 0.91%**    | **91.64% ± 0.92%**    | 4 |
+
 
 Visualisasi yang Direncanakan:
-| # | Jenis Grafik | Pesan Utama | Metrik |
-|---|-------------|-------------|--------|
-| 1 |             |             |        |
-| 2 |             |             |        |
+| # | Jenis Grafik                              | Pesan Utama                                                                  | Metrik                      |
+| - | ----------------------------------------- | ---------------------------------------------------------------------------- | --------------------------- |
+| 1 | Grafik Accuracy dan Loss                  | Menunjukkan proses pembelajaran model selama training dan validasi           | Accuracy, Loss              |
+| 2 | Confusion Matrix                          | Menunjukkan performa klasifikasi pada setiap kelas penyakit daun tomat       | Accuracy per kelas          |
+| 3 | Bar Chart Precision, Recall, dan F1-Score | Membandingkan performa model pada masing-masing kelas                        | Precision, Recall, F1-Score |
+| 4 | Visualisasi Grad-CAM                      | Menunjukkan area citra daun yang menjadi fokus model saat melakukan prediksi | Heatmap Grad-CAM            |
+
 
 Bias Check:
-  [ ] Y-axis mulai dari 0 (atau dijustifikasi)
-  [ ] Error bar/CI ditampilkan
-  [ ] Semua data disertakan (tidak cherry-picked)
-  [ ] Tidak menggunakan 3D tanpa alasan
+  [v] Y-axis mulai dari 0 (atau dijustifikasi)
+  [v] Error bar/CI ditampilkan
+  [v] Semua data disertakan (tidak cherry-picked)
+  [v] Tidak menggunakan 3D tanpa alasan
 ```
 
 ---
@@ -92,17 +96,16 @@ Bias Check:
 
 Buat tabel hasil eksperimen Anda (boleh dengan data simulasi jika belum punya data riil).
 
-| Skenario | Metrik 1 (mean ± std) | Metrik 2 (mean ± std) | n |
-|----------|----------------------|----------------------|---|
-| *Contoh: BERT-base* | *88.4 ± 1.2%* | *45.2 ± 3.1 min* | *10* |
-| | | | |
-| | | | |
+| Skenario                                                 | Accuracy (mean ± std) | Waktu Eksekusi (mean ± std) |  n |
+| -------------------------------------------------------- | --------------------: | --------------------------: | -: |
+| CNN (Epoch = 20, Batch Size = 32, Learning Rate = 0.001) |    **91.65 ± 0.90 %** |    **119.84 ± 32.92 menit** |  4 |
+
 
 **Checklist tabel:**
-- [ ] Self-contained (judul jelas, satuan ada, N tercantum)
-- [ ] Mean ± std (bukan single number)
-- [ ] Diurutkan berdasarkan metrik utama
-- [ ] Format konsisten di semua baris
+- [v] Self-contained (judul jelas, satuan ada, N tercantum)
+- [v] Mean ± std (bukan single number)
+- [v] Diurutkan berdasarkan metrik utama
+- [v] Format konsisten di semua baris
 
 ---
 
@@ -110,11 +113,12 @@ Buat tabel hasil eksperimen Anda (boleh dengan data simulasi jika belum punya da
 
 Rencanakan 2-3 grafik untuk menyajikan data dari Latihan 1. Setiap grafik = satu pesan.
 
-| # | Jenis Grafik | Pesan | Data yang Digunakan |
-|---|-------------|-------|---------------------|
-| 1 | *Contoh: Bar chart + error bar* | *Perbandingan accuracy antar 3 model* | *Mean accuracy ± std* |
-| 2 | *Box plot* | *Distribusi F1 per model* | *Semua run F1* |
-| 3 | *Scatter plot* | *Trade-off accuracy vs training time* | *Mean accuracy vs mean time* |
+| # | Jenis Grafik                 | Pesan                                                                                 | Data yang Digunakan                               |
+| - | ---------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| 1 | Line Chart (Accuracy & Loss) | Menunjukkan proses pembelajaran model selama training dan validasi hingga konvergen   | Accuracy dan Loss setiap epoch                    |
+| 2 | Confusion Matrix             | Menunjukkan kemampuan model mengklasifikasikan setiap kelas penyakit daun tomat       | Hasil prediksi dan label sebenarnya pada data uji |
+| 3 | Bar Chart + Error Bar        | Menunjukkan performa rata-rata model beserta variasi hasil dari empat kali eksperimen | Mean Accuracy ± Standard Deviation (4 run)        |
+
 
 ---
 
@@ -124,15 +128,16 @@ Evaluasi visualisasi berikut untuk bias (skenario dari contoh):
 
 **Skenario:** Metode A = 91.2%, Metode B = 90.8%. Bar chart dengan Y-axis mulai dari 90%.
 
-| Pertanyaan | Jawaban |
-|-----------|---------|
-| Apakah Y-axis menyesatkan? | *Contoh: Ya — A terlihat 2× B padahal beda 0.4%* |
-| Apakah error bar ditampilkan? | |
-| Apakah semua kondisi ditampilkan? | |
-| Apa solusinya? | |
+| Pertanyaan                        | Jawaban                                                                                                                                                          |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Apakah Y-axis menyesatkan?        | **Ya.** Perbedaan 0,4% akan terlihat jauh lebih besar daripada kondisi sebenarnya karena sumbu Y tidak dimulai dari 0.                                           |
+| Apakah error bar ditampilkan?     | **Tidak.** Error bar perlu ditampilkan agar variasi hasil antar-run dapat diketahui.                                                                             |
+| Apakah semua kondisi ditampilkan? | **Ya.** Kedua metode ditampilkan, tetapi visualisasi masih berpotensi menyesatkan karena skala sumbu Y.                                                          |
+| Apa solusinya?                    | Gunakan sumbu Y yang dimulai dari 0 atau berikan alasan jika menggunakan rentang tertentu, serta tampilkan error bar (standar deviasi atau confidence interval). |
+
 
 **Evaluasi grafik Anda sendiri dari Latihan 2:**
-- [ ] Semua bias check lulus
+- [v] Semua bias check lulus
 - [ ] Ada yang perlu diperbaiki: ____
 
 ---
@@ -141,5 +146,5 @@ Evaluasi visualisasi berikut untuk bias (skenario dari contoh):
 
 > Mengapa tabel dan grafik keduanya diperlukan — tidak cukup salah satu saja? Pernahkah Anda membuat grafik yang (tanpa sengaja) menyesatkan?
 
-> ___________________________________________________
-> ___________________________________________________
+> Tabel dan grafik memiliki fungsi yang saling melengkapi. Tabel menyajikan nilai numerik secara lengkap dan presisi sehingga memudahkan pembaca melihat hasil setiap metrik. Sementara itu, grafik memudahkan pembaca memahami pola, tren, dan perbandingan hasil secara visual. Oleh karena itu, penggunaan keduanya memberikan informasi yang lebih komprehensif dibandingkan hanya menggunakan salah satunya.
+> Pada penelitian ini, visualisasi dirancang agar tidak menyesatkan dengan menggunakan skala sumbu yang sesuai, menampilkan seluruh data hasil eksperimen, serta menyertakan error bar ketika menyajikan nilai rata-rata dari beberapa kali run. Pendekatan ini membantu memastikan bahwa hasil penelitian disajikan secara objektif dan mudah dipahami.
