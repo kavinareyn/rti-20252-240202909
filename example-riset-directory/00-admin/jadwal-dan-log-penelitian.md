@@ -1,18 +1,51 @@
 # Jadwal & Log Pelaksanaan Penelitian
 
-Catatan kronologis pelaksanaan tiap tahap (sumber: riwayat commit git & dokumen `09-docs/tahap-N-*.md`). Tanggal mengikuti `git log`.
+Dokumen ini berisi kronologi pelaksanaan penelitian mulai dari tahap persiapan dataset, implementasi model Convolutional Neural Network (CNN), proses pelatihan (training), evaluasi model, hingga visualisasi hasil menggunakan Grad-CAM. Seluruh eksperimen dilakukan pada komputer lokal menggunakan framework TensorFlow dan bahasa pemrograman Python.
+
+# Informasi Penelitian
+| Keterangan             | Informasi                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| **Nama Peneliti**      | Kavina Reyna Riyadi                                                            |
+| **NIM**                | 240202909                                                                      |
+| **Program Studi**      | S1 Ilmu Komputer                                                                 |
+| **Universitas**        | Universitas Putra Bangsa                                                       |
+| **Judul Penelitian**   | Klasifikasi Penyakit Daun Tomat Menggunakan Convolutional Neural Network (CNN) |
+| **Dataset**            | Tomato Leaf Disease Dataset (22.193 citra, 10 kelas)                           |
+| **Platform**           | Visual Studio Code (Windows 11)                                                |
+| **Framework**          | TensorFlow 2.21.0, Keras 3.15.0                                                |
+| **Bahasa Pemrograman** | Python 3.11                                                                    |
+| **Metode**             | Convolutional Neural Network (CNN)                                             |
+| **Visualisasi**        | Grad-CAM                                                                       |
+| **Status Penelitian**  | ⏳ Dalam Proses *(ubah menjadi ✅ Selesai setelah seluruh eksperimen selesai)*   |
 
 ## Log Pelaksanaan
 
-| Tanggal | Tahap | Aktivitas | Referensi |
-|---|---|---|---|
-| 2026-06-12 s.d. 2026-06-13 (commit 01:05) | Tahap 1 & 2 | Perancangan arsitektur/skema database; implementasi API Gateway Go (Echo) — clean architecture, migrasi Sqitch, seed script, docker-compose, verifikasi end-to-end (`CACHE_MODE=none`/`hybrid`, fail-closed/fail-open) | [09-docs/tahap-1-arsitektur-dan-skema-database.md](../09-docs/tahap-1-arsitektur-dan-skema-database.md), [09-docs/tahap-2-implementasi-gateway.md](../09-docs/tahap-2-implementasi-gateway.md) |
-| 2026-06-13 01:05 | Tahap 3 | Implementasi skrip k6 (`legitimate.js`, `attack.js`, `mixed.js`), runner & monitor resource | [09-docs/tahap-3-pengujian-k6.md](../09-docs/tahap-3-pengujian-k6.md) |
-| 2026-06-12 18:05–18:59 (≈54 menit) | Tahap 3 | Eksekusi matrix penuh 50 run (2 `CACHE_MODE` × 5 `traffic_variant` × 5 replikasi), seluruhnya `k6_exit_code = 0` | commit "Mark Tahap 3 complete after running full 50-run k6 matrix" (2026-06-13 02:00) |
-| 2026-06-13 07:41 | Tahap 4 | Pipeline analisis Python (`run_all.py`), 6 tabel CSV + 5 figure PNG, dokumen Tahap 4 diperbarui ke status Selesai | [09-docs/tahap-4-analisis-data.md](../09-docs/tahap-4-analisis-data.md), [06-output/](../06-output/) |
-| 2026-06-13 | Tahap 5 | Draf konten naskah (8 bagian) di `07-manuskrip/`; pelengkapan `01-proposal/`, `02-literatur/`, `03-teori/`, dan laporan penelitian `08-laporan/` | [09-docs/tahap-5-draf-paper.md](../09-docs/tahap-5-draf-paper.md), [08-laporan/laporan-penelitian.md](../08-laporan/laporan-penelitian.md) |
-| 2026-06-13 | Tahap 5 | Verifikasi CVE-2026-48524 (terkonfirmasi via GHSA-fhv5-28vv-h8m8); pencarian 18 referensi literatur nyata & penyusunan bibliografi Mendeley; pelengkapan §2.4 *Related Work* di `03-tinjauan-pustaka.md` dan `07-daftar-pustaka.md`; penyusunan naskah konsolidasi `naskah-jurnal.md`/`.docx` | [02-literatur/matriks-literatur.md](../02-literatur/matriks-literatur.md), [02-literatur/daftar-pustaka.bib](../02-literatur/daftar-pustaka.bib), [07-manuskrip/naskah-jurnal.md](../07-manuskrip/naskah-jurnal.md) |
-| 2026-06-15 | Tahap 3 & 4 | Perluasan replikasi dari 5 menjadi 40 per kombinasi: regenerasi token JWT legitimate (sebelumnya *expired*), flush cache Redis, eksekusi matrix penuh 400 run (2 `CACHE_MODE` × 5 `traffic_variant` × 40 replikasi) via `run-matrix.sh`, seluruhnya `k6_exit_code = 0` (selesai 2026-06-15T09:53:24Z); dataset 50-run lama diarsipkan ke `04-data/_archive-50run-20260612/`; pipeline analisis (`run_all.py`) dijalankan ulang atas dataset baru; seluruh statistik di `naskah-jurnal.md`/`.docx`, `00-outline.md`, dan dokumen `09-docs/`/`08-laporan/`/`01-proposal/` diperbarui ke n=40 | [09-docs/tahap-3-pengujian-k6.md](../09-docs/tahap-3-pengujian-k6.md), [09-docs/tahap-4-analisis-data.md](../09-docs/tahap-4-analisis-data.md), [04-data/matrix-40run.log](../04-data/matrix-40run.log) |
+| Tanggal         | Tahap                                         | Deskripsi Kegiatan                                                                                                                                                                                                                                      | Referensi                               |
+| --------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| 01–03 Juli 2026 | **Tahap 1 — Studi Literatur**                 | Mempelajari konsep Convolutional Neural Network (CNN), klasifikasi citra, TensorFlow, serta beberapa penelitian terdahulu mengenai klasifikasi penyakit daun tomat menggunakan metode deep learning.                                                    | WS-01 s.d. WS-08                        |
+| 04 Juli 2026    | **Tahap 2 — Persiapan Dataset & Environment** | Menyiapkan lingkungan pengembangan menggunakan Visual Studio Code, Python 3.11, TensorFlow 2.21, Keras 3.15, serta mengunduh dan menyusun struktur folder Tomato Leaf Disease Dataset yang terdiri dari 10 kelas.                                       | Dataset, requirements.txt               |
+| 05 Juli 2026    | **Tahap 3 — Preprocessing Data**              | Melakukan pemuatan dataset menggunakan `image_dataset_from_directory`, mengubah ukuran citra menjadi 224×224 piksel, normalisasi data, serta membangun pipeline `tf.data` untuk proses training dan testing.                                            | `dataset_loader.py`, `preprocessing.py` |
+| 06–08 Juli 2026 | **Tahap 4 — Implementasi Model CNN**          | Membangun arsitektur CNN sederhana yang terdiri atas tiga lapisan Convolution, MaxPooling, Flatten, Dense, Dropout, dan Softmax sebagai layer keluaran untuk klasifikasi 10 kelas penyakit daun tomat.                                                  | `cnn_model.py`                          |
+| 09–12 Juli 2026 | **Tahap 5 — Training Model**                  | Melakukan proses pelatihan model menggunakan optimizer Adam, learning rate 0,001, batch size 32, dan jumlah epoch sesuai konfigurasi. Selama tahap ini dilakukan beberapa pengujian serta perbaikan pada proses penyimpanan model dan history training. | `train.py`, `main.py`                   |
+| 12 Juli 2026    | **Tahap 6 — Evaluasi Model**                  | Menghitung metrik Accuracy, Precision, Recall, dan F1-Score, menghasilkan Classification Report, Confusion Matrix, serta menyimpan hasil evaluasi ke dalam file JSON dan TXT.                                                                           | `evaluate.py`                           |
+| 12 Juli 2026    | **Tahap 7 — Visualisasi Hasil**               | Membuat grafik Accuracy dan Loss selama proses training, serta menghasilkan visualisasi Grad-CAM untuk menunjukkan area citra daun yang menjadi fokus model dalam proses klasifikasi.                                                                   | `plot_history.py`, `gradcam.py`         |
+| 13 Juli 2026    | **Tahap 8 — Analisis Hasil**                  | Menganalisis performa model berdasarkan metrik evaluasi, grafik training, confusion matrix, dan hasil visualisasi Grad-CAM untuk mengetahui kemampuan model dalam membedakan setiap kelas penyakit daun tomat.                                          | Output Evaluasi                         |
+| 13 Juli 2026    | **Tahap 9 — Penyusunan Laporan**              | Menyusun dokumentasi eksperimen, hasil implementasi, pembahasan, serta kesimpulan penelitian berdasarkan hasil pengujian yang telah diperoleh.                                                                                                          | Laporan Akhir                           |
+
+## Informasi Eksperimen
+| Parameter               | Nilai                           |
+| ----------------------- | ------------------------------- |
+| Image Size              | 224 × 224 piksel                |
+| Batch Size              | 32                              |
+| Optimizer               | Adam                            |
+| Learning Rate           | 0.001                           |
+| Loss Function           | Sparse Categorical Crossentropy |
+| Activation Hidden Layer | ReLU                            |
+| Activation Output Layer | Softmax                         |
+| Epoch                   | 20                              |
+| Jumlah Kelas            | 10                              |
+| Seed                    | 42 *(jika memang digunakan)*    |
+
 
 ## Status Ringkas
 
