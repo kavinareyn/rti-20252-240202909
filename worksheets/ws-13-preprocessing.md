@@ -66,33 +66,38 @@ Data leakage terjadi ketika informasi dari test set "bocor" ke preprocessing:
 ```
 PREPROCESSING LOG
 
-Dataset           : ____________________
-Jumlah data awal  : ____________________
+Dataset           : Tomato Leaf Disease Dataset (Kaggle)
+Jumlah data awal  : 22.193 citra (17.753 data training + 4.440 data testing)
 
-Cleaning:
-| Masalah | Jumlah Kasus | Penanganan | Justifikasi |
-|---------|-------------|------------|-------------|
-| Missing |             |            |             |
-| Duplikat|             |            |             |
-| Error   |             |            |             |
+| Masalah  | Jumlah Kasus | Penanganan         | Justifikasi                                                              |
+| -------- | -----------: | ------------------ | ------------------------------------------------------------------------ |
+| Missing  |            0 | Tidak ada tindakan | Seluruh citra berhasil dimuat tanpa data hilang.                         |
+| Duplikat |            0 | Tidak ada tindakan | Dataset tidak mengandung citra duplikat yang digunakan dalam eksperimen. |
+| Error    |            0 | Tidak ada tindakan | Seluruh file citra berhasil dibaca dan diproses.                         |
+
 
 Transformation:
-| Transformasi | Variabel | Detail | Alasan |
-|-------------|----------|--------|--------|
-|             |          |        |        |
+| Transformasi      | Variabel     | Detail                        | Alasan                                              |
+| ----------------- | ------------ | ----------------------------- | --------------------------------------------------- |
+| Resize Image      | Citra daun   | 224 × 224 piksel              | Menyeragamkan ukuran input CNN.                     |
+| Convert to Tensor | Citra daun   | TensorFlow Tensor             | Agar dapat diproses oleh TensorFlow/Keras.          |
+| Rescaling         | Nilai piksel | 0–255 → 0–1 (`image / 255.0`) | Mempercepat dan menstabilkan proses training model. |
+
 
 Normalization:
-  Metode    : ____________________
-  Alasan    : ____________________
-  Parameter : (dihitung dari: training set / seluruh data)
+  Metode    : Min-Max Normalization (Rescaling)
+  Alasan    : Mengubah rentang nilai piksel dari 0–255 menjadi 0–1 sehingga proses optimasi model CNN menjadi lebih stabil dan konvergensi lebih cepat.
+  Parameter : Dihitung dari setiap citra pada dataset training dan diterapkan secara konsisten pada data testing.
 
 Leakage Check:
-  [ ] Parameter normalisasi dari training set saja
-  [ ] Tidak ada informasi test set dalam preprocessing
-  [ ] Cross-validation dilakukan setelah split
+  [v] Parameter normalisasi dari training set saja
+  [v] Tidak ada informasi test set dalam preprocessing
+  [v] Cross-validation dilakukan setelah split
 
-Jumlah data akhir : ____________________
-Script tersedia   : [ ] Ya → path: ____ | [ ] Belum
+Jumlah data akhir : 22.193 citra
+Script tersedia   : [v] Ya → path: src/data/check_dataset.py
+src/data/dataset_loader.py
+src/data/preprocessing.py | [ ] Belum
 ```
 
 ---
