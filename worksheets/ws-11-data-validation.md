@@ -66,30 +66,31 @@ Jika gagal di langkah awal → tidak perlu lanjut.
 DATA VALIDATION CHECKLIST
 
 Completeness:
-  [ ] Semua skenario tercakup
-  [ ] Jumlah run sesuai rencana
-  [ ] Tidak ada file output hilang
-  Missing: ____ dari ____ data points
+  [✓] Semua skenario tercakup
+  [✓] Jumlah run sesuai rencana
+  [✓] Tidak ada file output hilang
+  Missing: 0 dari 4 data points
 
 Format Consistency:
-  [ ] Semua file format sama (CSV/JSON/...)
-  [ ] Header konsisten
-  [ ] Tipe data konsisten (numerik tetap numerik)
+  [✓] Semua file format sama (CSV/JSON/PKL/PNG/KERAS/TXT)
+  [✓] Header konsisten
+  [✓] Tipe data konsisten (numerik tetap numerik)
 
 Range & Logic:
-  [ ] Nilai dalam range masuk akal
-  [ ] Tidak ada waktu negatif
-  [ ] Metrik 0–100%, tidak di luar range
-  Anomali ditemukan: ____________________
+  [✓] Nilai dalam range masuk akal
+  [✓] Tidak ada waktu negatif
+  [✓] Metrik 0–100%, tidak di luar range
+  Anomali ditemukan:
+  - Perbedaan waktu eksekusi antar-run (98–168 menit), namun seluruh metrik evaluasi tetap konsisten sehingga tidak memengaruhi validitas hasil.
 
 Cross-Validation:
-  [ ] Run identik → hasil mendekati
-  [ ] Trend konsisten dengan ekspektasi teori
+  [✓] Run identik → hasil mendekati
+  [✓] Trend konsisten dengan ekspektasi teori
 
 Keputusan:
-  [ ] Data siap analisis
+  [✓] Data siap analisis
   [ ] Perlu cleaning
-  [ ] Perlu re-run (skenario: ____)
+  [ ] Perlu re-run (skenario: -)
 ```
 
 ---
@@ -98,17 +99,15 @@ Keputusan:
 
 Verifikasi apakah semua data yang direncanakan sudah terkumpul.
 
-| Skenario | Run Direncanakan | Run Tercatat | Missing | Alasan |
-|----------|-----------------|-------------|---------|--------|
-| *Contoh: BERT, DS-1* | *10* | *10* | *0* | *—* |
-| *LSTM, DS-3* | *10* | *8* | *2* | *OOM pada run 7 & 9* |
-| | | | | |
-| | | | | |
+|| Skenario                                 | Run Direncanakan | Run Tercatat | Missing | Alasan |
+| ---------------------------------------- | :--------------: | :----------: | :-----: | ------ |
+| CNN – Tomato Leaf Disease Classification |         4        |       4      |    0    | —      |
 
-**Total expected:** ____ | **Total actual:** ____ | **Missing:** ____
+
+**Total expected:** 4 | **Total actual:** 4 | **Missing:** 0
 
 **Keputusan untuk data missing:**
-> ___________________________________________________
+> Tidak ada data yang hilang. Seluruh run berhasil dikumpulkan sesuai rencana sehingga data siap digunakan untuk analisis.
 
 ---
 
@@ -119,24 +118,25 @@ Periksa data Anda untuk anomali. Gunakan metode IQR atau z-score.
 **Dataset sampel (atau data Anda sendiri):**
 
 | Run | Accuracy (%) |
-|-----|-------------|
-| 1 | *91.2* |
-| 2 | *90.8* |
-| 3 | *91.5* |
-| 4 | *78.3* |
-| 5 | *91.0* |
+| --- | -----------: |
+| 1   |        91.08 |
+| 2   |        91.55 |
+| 3   |        91.01 |
+| 4   |        92.95 |
+
 
 **Deteksi outlier:**
-- Q1 = ____ | Q3 = ____ | IQR = ____
-- Batas bawah (Q1 - 1.5×IQR) = ____
-- Batas atas (Q3 + 1.5×IQR) = ____
-- Outlier terdeteksi: ____
+- Q1 = 91.045 | Q3 = 92.25 | IQR = 1.205
+- Batas bawah (Q1 - 1.5×IQR) = 89.238
+- Batas atas (Q3 + 1.5×IQR) = 94.058
+- Outlier terdeteksi: tidak ada
 
 **Investigasi (untuk setiap outlier):**
 
-| Outlier | Nilai | Kemungkinan Penyebab | Keputusan |
-|---------|-------|---------------------|-----------|
-| *Run 4* | *78.3* | *Contoh: thermal throttling setelah 3 run berturut* | *Re-run dengan cooling interval* |
+| Outlier   | Nilai | Kemungkinan Penyebab                          | Keputusan                                               |
+| --------- | ----: | --------------------------------------------- | ------------------------------------------------------- |
+| Tidak ada |     — | Seluruh nilai accuracy berada dalam batas IQR | Seluruh data dipertahankan dan digunakan untuk analisis |
+
 
 ---
 
@@ -144,12 +144,27 @@ Periksa data Anda untuk anomali. Gunakan metode IQR atau z-score.
 
 Buat laporan validasi ringkas untuk dataset eksperimen Anda.
 
-**1. Completeness:** ____% data terkumpul
-**2. Format:** [ ] Konsisten / [ ] Ada inkonsistensi: ____
-**3. Range check (anomali):** ____
-**4. Logic check:** [ ] Parameter sesuai plan / [ ] Ada ketidaksesuaian: ____
+1. Completeness: 100% data terkumpul.
 
-**Kesimpulan:** [ ] Data siap analisis / [ ] Perlu tindakan: ____
+2. Format: ☑ Konsisten / ☐ Ada inkonsistensi
+
+3. Range check (anomali):
+
+Tidak ditemukan nilai di luar rentang yang wajar. Seluruh metrik Accuracy, Precision, Recall, dan F1-Score berada pada rentang 0–100%, serta tidak ditemukan outlier berdasarkan metode IQR.
+
+4. Logic check: ☑ Parameter sesuai plan / ☐ Ada ketidaksesuaian
+
+Semua eksperimen menggunakan konfigurasi yang sama:
+
+Model CNN
+Epoch = 20
+Batch Size = 32
+Learning Rate = 0.001
+Seed = 42
+Kesimpulan
+
+☑ Data siap analisis
+☐ Perlu tindakan: —
 
 ---
 
@@ -157,5 +172,4 @@ Buat laporan validasi ringkas untuk dataset eksperimen Anda.
 
 > Apa perbedaan antara "data yang benar" dan "data yang dipercaya"? Mengapa proses validasi formal diperlukan meskipun data dikumpulkan secara otomatis?
 
-> ___________________________________________________
-> ___________________________________________________
+> Data yang benar adalah data yang berhasil dikumpulkan sesuai hasil pengukuran atau proses komputasi. Namun, data yang dipercaya adalah data yang telah melalui proses validasi sehingga terbukti lengkap, konsisten, logis, dan bebas dari kesalahan yang dapat memengaruhi hasil penelitian. Oleh karena itu, validasi formal tetap diperlukan meskipun data dikumpulkan secara otomatis, karena proses otomatis masih dapat menghasilkan kesalahan seperti data yang tidak lengkap, nilai yang tidak wajar, atau inkonsistensi akibat gangguan selama proses eksperimen. Validasi membantu memastikan bahwa data yang digunakan benar-benar layak untuk dianalisis dan dijadikan dasar dalam penarikan kesimpulan penelitian.

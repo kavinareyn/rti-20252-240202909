@@ -267,5 +267,6 @@ Rencanakan bagaimana menangani anomali. Untuk setiap jenis, tentukan langkah yan
 
 **Pengalaman sebelumnya:**
 > Pada awalnya, hasil eksperimen hanya diperoleh dari satu kali proses training sehingga belum dapat menunjukkan konsistensi performa model. Selain itu, selama pengembangan sempat ditemukan beberapa kendala seperti error saat penyimpanan model (I/O operation on closed file) dan perbedaan waktu eksekusi antar-run yang perlu dianalisis sebelum hasil digunakan sebagai hasil akhir penelitian.
+
 **Yang akan dilakukan berbeda:**
 > Pada penelitian ini dilakukan empat kali eksperimen (multiple run) dengan konfigurasi yang sama untuk menguji repeatability model. Setiap hasil dicatat, dibandingkan menggunakan metrik Accuracy, Precision, Recall, dan F1-Score, serta didokumentasikan bersama waktu eksekusi dan kemungkinan anomali. Pendekatan ini meningkatkan kepercayaan terhadap hasil penelitian karena menunjukkan bahwa model memberikan performa yang konsisten pada beberapa kali pengujian.
