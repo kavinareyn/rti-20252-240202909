@@ -1,30 +1,79 @@
 # 06-output
 
-Hasil olahan data & visualisasi — **Tahap 4** (lihat [../09-docs/tahap-4-analisis-data.md](../09-docs/tahap-4-analisis-data.md)).
+Tahap ini berisi seluruh hasil yang dihasilkan dari proses implementasi model Convolutional Neural Network (CNN) untuk klasifikasi penyakit daun tomat. Output diperoleh dari proses training, evaluasi model, prediksi citra, dan visualisasi Grad-CAM.
 
-Dihasilkan oleh `05-kode/analysis/run_all.py` dari data mentah `04-data/` (matrix 400 run, 40 replikasi).
+Hasil dihasilkan oleh:
 
-## tables/
+main.py
+predict.py
+run_gradcam.py
 
-| File | Isi |
-|---|---|
-| `descriptive_stats.csv` | Statistik deskriptif (latensi avg/p90/p95/max, RPS, failed/checks rate) per (cache_mode, traffic_variant), mean±std atas 40 replikasi |
-| `descriptive_stats_mixed_scenarios.csv` | Breakdown latensi legitimate vs attack untuk traffic_variant `mixed-unique`/`mixed-pool` |
-| `dperf.csv` | $D_{perf}$ = (T_hybrid − T_none) / T_none × 100% untuk traffic legitimate (baseline & dalam mixed) |
-| `resource_usage.csv` | CPU% & memori (MiB) mean/max per (cache_mode, traffic_variant, container) |
-| `mitigation_effectiveness.csv` | Metrik efektivitas mitigasi dari delta `/metrics` gateway (db queries, cache hit ratio, rate-limit blocked, auth outcome) |
-| `db_query_reduction.csv` | Penurunan total query Postgres hybrid vs none per traffic_variant |
+menggunakan dataset Tomato Leaf Disease Dataset.
 
-## figures/
+## outputs/
+evaluations/
 
-| File | Isi |
-|---|---|
-| `fig_latency_p95.png` | Bar chart `http_req_duration` p95 per traffic_variant: none vs hybrid (mean±std, log scale) |
-| `fig_dperf.png` | Bar chart $D_{perf}$ (avg & p95) untuk 3 perbandingan traffic legitimate |
-| `fig_db_queries_reduction.png` | Bar chart total query Postgres per run: none vs hybrid (log scale) |
-| `fig_postgres_cpu.png` | Bar chart CPU% rata-rata container `gateway-postgres-1`: none vs hybrid |
-| `fig_resource_timeseries.png` | Time-series CPU% `gateway-postgres-1` selama `mixed-pool` rep1: none vs hybrid |
+| File                        | Isi                                                                 |
+| --------------------------- | ------------------------------------------------------------------- |
+| `classification_report.txt` | Laporan Precision, Recall, F1-Score setiap kelas penyakit.          |
+| `evaluation_result.txt`     | Accuracy, Precision, Recall, dan F1-Score model secara keseluruhan. |
 
-## Acuan
+figures/
 
-[../09-docs/tahap-4-analisis-data.md](../09-docs/tahap-4-analisis-data.md)
+| File                   | Isi                                                                          |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| `accuracy.png`         | Grafik perkembangan accuracy training dan validation pada setiap epoch.      |
+| `loss.png`             | Grafik perkembangan loss training dan validation selama proses training.     |
+| `confusion_matrix.png` | Visualisasi Confusion Matrix hasil klasifikasi 10 kelas penyakit daun tomat. |
+
+history/
+| File          | Isi                                                                                  |
+| ------------- | ------------------------------------------------------------------------------------ |
+| `history.csv` | Riwayat nilai accuracy, validation accuracy, loss, dan validation loss setiap epoch. |
+| `history.pkl` | History training dalam format Pickle untuk kebutuhan visualisasi ulang.              |
+
+models/
+
+| File               | Isi                                                                               |
+| ------------------ | --------------------------------------------------------------------------------- |
+| `tomato_cnn.keras` | Model CNN terbaik hasil proses training yang digunakan untuk prediksi citra baru. |
+
+gradcam/
+| File             | Isi                                                     |
+| ---------------- | ------------------------------------------------------- |
+| `*_original.png` | Citra asli sebelum diproses.                            |
+| `*_heatmap.png`  | Heatmap Grad-CAM yang menunjukkan area perhatian model. |
+| `*_overlay.png`  | Overlay antara citra asli dan heatmap Grad-CAM.         |
+
+## Ringkasan Output Penelitian
+| Jenis Output          | Keterangan                       |
+| --------------------- | -------------------------------- |
+| Model CNN             | Model hasil training (`.keras`)  |
+| History Training      | CSV dan PKL                      |
+| Accuracy Graph        | PNG                              |
+| Loss Graph            | PNG                              |
+| Confusion Matrix      | PNG                              |
+| Classification Report | TXT                              |
+| Evaluation Result     | TXT                              |
+| Grad-CAM Heatmap      | PNG                              |
+| Prediksi Citra Baru   | Label kelas dan confidence score |
+
+
+## Contoh hasil evaluasi
+| Metrik    | Nilai      |
+| --------- | ---------- |
+| Accuracy  | **92,95%** |
+| Precision | **93,16%** |
+| Recall    | **92,95%** |
+| F1-Score  | **92,97%** |
+
+## visualisasi output
+Tahap ini menghasilkan beberapa visualisasi yang digunakan untuk mengevaluasi performa model CNN dan menginterpretasikan hasil klasifikasi penyakit daun tomat. Visualisasi dibuat secara otomatis selama proses training, evaluasi, dan interpretasi model.
+| File                    | Visualisasi                  | Keterangan                                                                                                                                                                          |
+| ----------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accuracy.png`          | **Grafik Accuracy Training** | Menampilkan perkembangan nilai *training accuracy* dan *validation accuracy* pada setiap epoch. Grafik digunakan untuk melihat peningkatan kemampuan model selama proses pelatihan. |
+| `loss.png`              | **Grafik Loss Training**     | Menampilkan perubahan nilai *training loss* dan *validation loss* pada setiap epoch untuk mengevaluasi proses konvergensi model.                                                    |
+| `confusion_matrix.png`  | **Confusion Matrix**         | Menunjukkan jumlah prediksi benar dan salah pada setiap kelas penyakit daun tomat sehingga memudahkan analisis performa model.                                                      |
+| `img_h_17_original.png` | **Original Image**           | Menampilkan citra daun tomat asli yang digunakan sebagai input proses prediksi.                                                                                                     |
+| `img_h_17_heatmap.png`  | **Grad-CAM Heatmap**         | Menampilkan area citra yang memiliki kontribusi terbesar terhadap keputusan model dalam melakukan klasifikasi.                                                                      |
+| `img_h_17_overlay.png`  | **Grad-CAM Overlay**         | Menggabungkan citra asli dengan heatmap sehingga area penting yang diperhatikan model dapat terlihat lebih jelas.                                                                   |
